@@ -14,17 +14,36 @@ class StudentController extends Controller
 {
     public function index()
     {
+        // Confirm Delete Alert
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin menghapus data?";
+        confirmDelete($title, $text);
 
+        return view('students.index');
     }
 
     public function datatable()
     {
+        $model = Student::query();
+        return DataTables::of($model)
+            ->addColumn('action', function ($data) {
+                $url_show = route('student.show', Crypt::encrypt($data->id));
+                $url_edit = route('student.edit', Crypt::encrypt($data->id));
+                $url_delete = route('student.destroy', Crypt::encrypt($data->id));
 
+                $btn = "<div class='btn-group'>";
+                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                $btn .= "</div>";
+            })
+            ->toJson();
     }
 
     public function create()
     {
-
+        $students = Student::all();
+        return view('students.create', compact('students'));
     }
 
     public function edit()
