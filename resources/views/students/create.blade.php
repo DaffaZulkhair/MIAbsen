@@ -62,11 +62,12 @@
                         </div>
                         <div class="form-group">
                             <label for="nim">Program Studi : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <select class="form-control" name="gender" id="gender" required>
+                                <option style="font-color:darkgreen" selected>Pilih Program Studi</option>
+                                @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="nim">No. Handphone : </label>
@@ -90,11 +91,12 @@
                         </div>
                         <div class="form-group">
                             <label for="nim">Agama : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <select class="form-control" name="gender" id="gender" required>
+                                <option selected>Pilih Program Studi</option>
+                                @foreach (App\Models\Student::AGAMA_CHOICE as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="nim">Tahun Masuk : </label>
