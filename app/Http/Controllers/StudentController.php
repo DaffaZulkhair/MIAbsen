@@ -27,6 +27,10 @@ class StudentController extends Controller
     {
         $model = Student::query();
         return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $dateFormat = Carbon::parse($data['created_at'])->translatedFormat('d F Y - H:i');
+                return $dateFormat;
+            })
             ->addColumn('action', function ($data) {
                 $url_show = route('student.show', Crypt::encrypt($data->id));
                 $url_edit = route('student.edit', Crypt::encrypt($data->id));
@@ -37,6 +41,8 @@ class StudentController extends Controller
                 $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
                 $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
                 $btn .= "</div>";
+
+                return $btn;
             })
             ->toJson();
     }
@@ -65,6 +71,14 @@ class StudentController extends Controller
 
             // Decrypt Data
             $input['user_id'] = Crypt::decrypt($request->user_id);
+
+            // Save Image
+            if ($file = $request->file('photo')) {
+                $destinationPath = 'assets/images/';
+                $fileName = "MAHASISWA" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $file->move($destinationPath, $fileName);
+                $input['photo'] = $fileName;
+            }
 
             // Create Data
             Student::create($input);

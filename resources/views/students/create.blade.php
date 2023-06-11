@@ -15,7 +15,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('student.store') }}" method="POST">
+                    @if (session('error'))
+                        <span class="text-danger">{{ $message }}</span>
+                    @endif
+                    <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="user_id">Nama Akun</label>
@@ -81,7 +84,7 @@
                         </div>
                         <div class="form-group">
                             <label for="study_program">Program Studi : </label>
-                            <select class="form-control" name="gender" id="gender" required>
+                            <select class="form-control" name="study_program" id="study_program" required>
                                 <option style="font-color:darkgreen" selected>Pilih Program Studi</option>
                                 @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
@@ -110,7 +113,7 @@
                         </div>
                         <div class="form-group">
                             <label for="religion">Agama : </label>
-                            <select class="form-control" name="gender" id="gender" required>
+                            <select class="form-control" name="religion" id="religion" required>
                                 <option selected>Pilih Program Studi</option>
                                 @foreach (App\Models\Student::AGAMA_CHOICE as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
@@ -128,8 +131,8 @@
                         <div class="form-group">
                             <label for="file">Masukkan Foto</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" name="photo" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Pilih File</label>
                             </div>
                         </div>
                         <a href="{{ route('student.index') }}" class="btn bg-danger">Kembali</a>
