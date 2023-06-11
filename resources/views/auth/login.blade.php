@@ -75,6 +75,11 @@
                                     <p class="line-around text-secondary mb-0"><span class="line-around-1">or login with
                                             email</span></p>
                                 </div>
+
+                                @if (session('error'))
+                                    <p>{{ session('error') }}</p>
+                                @endif
+
                                 <form action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="row">
