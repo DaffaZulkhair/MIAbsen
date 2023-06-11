@@ -74,9 +74,9 @@
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
             <a href="index.html" class="navbar-brand p-0">
                 <h1 class="m-0">
-                    <img src="{{ asset('design/img/mi.png') }}" alt="" width="50" height="50" />
                     <img src="{{ asset('design/img/polsri.png') }}" alt="" width="50" height="50" />
-                    Miabsen
+                    <img src="{{ asset('design/img/mi.png') }}" alt="" width="50" height="50" />
+
                 </h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -88,7 +88,7 @@
                     <a href="#about" class="nav-item nav-link">Tentang</a>
                     <a href="contact.html" class="nav-item nav-link">Kontak</a>
                 </div>
-                <a href="{{ route('login') }}" class="btn btn-primary py-2 px-4 ms-3">Login</a>
+                <a href="{{ route('login') }}" class="btn btn-primary py-2 px-4 ms-3">Masuk</a>
             </div>
         </nav>
 
@@ -99,13 +99,13 @@
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">
-                                MIabsen
+                                SELAMAT DATANG DI
                             </h5>
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
                                 Absensi Mahasiswa MI
                             </h1>
-                            <a href="quote.html"
-                                class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Mulai</a>
+                            <a href="{{ route('login') }}"
+                                class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Masuk</a>
                         </div>
                     </div>
                 </div>
@@ -224,17 +224,17 @@
                             <i class="fa fa-phone-alt text-white"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="mb-2">Call to ask any question</h5>
+                            <h5 class="mb-2">Bila terdapat kendala hubungi admin</h5>
                             <h4 class="text-primary mb-0">+012 345 6789</h4>
                         </div>
                     </div>
                     <a href="quote.html" class="btn btn-primary py-3 px-5 mt-3 wow zoomIn"
-                        data-wow-delay="0.9s">Request A Quote</a>
+                        data-wow-delay="0.9s">Hubungi</a>
                 </div>
                 <div class="col-lg-5" style="min-height: 500px">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
-                            src="{{ asset('design/img/about.jpg') }}" style="object-fit: cover" />
+                            src="{{ asset('design/img/logomiabsen.png') }}" style="object-fit: cover" />
                     </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@
     </div>
     <!-- About End -->
 
-    <!-- Quote Start -->
+    {{-- <!-- Quote Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -312,7 +312,7 @@
             </div>
         </div>
     </div>
-    <!-- Quote End -->
+    <!-- Quote End --> --}}
 
     <!-- Team Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
