@@ -1,66 +1,103 @@
 @extends('layouts.app')
 
+@section('css_after')
+@endsection
+
 @section('content')
     <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="header-title">
-                        <h4 class="card-title">Data Kelas</h4>
-                    </div>
-                    <div class="header-action">
-                        <i data-toggle="collapse" data-target="#datatable-1" aria-expanded="false">
-
-                        </i>
-                        <div class="float-right ">
-                            <a class="btn btn-sm bg-primary" href="{{ route('student.create') }}"><span
-                                    class="pl-1">Tambah
-                                    Data</span>
-                            </a>
+        <div class="col-md-12 mb-4 mt-1">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <h4 class="font-weight-bold">Mahasiswa</h4>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+                                <h4 class="card-title">Kelola Mahasiswa</h4>
+                            </div>
+                            <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
+                                    class="fa fa-plus"></i> Tambah Data</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="data-table" class="table table-striped table-bordered" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Aksi</th>
+                                            <th>NIM</th>
+                                            <th>Nama</th>
+                                            <th>Kelas</th>
+                                            <th>Program Studi</th>
+                                            <th>Diinput pada</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-
-                    {{-- Ikak Tambah Data --}}
-
                 </div>
-                <div class="card-body">
-                    <div class="collapse" id="datatable-1">
-                        <div class="card">
-                            <kbd class="bg-dark">
-                                <pre id="bootstrap-datatables" class="text-white"><code>
+            </div>
+        </div>
+    </div>
+@endsection
 
-                                                    </div>
-                                                </div>
-                                                {{-- <p>
-                                                Images in Bootstrap are made responsive with
-                                                <code>.img-fluid</code>. <code>max-width: 100%;</code> and
-                                                <code>height: auto;</code> are applied to the image so that
-                                                it scales with the parent element.
-                                            </p> --}}
-                                                <div class="table-responsive">
-                                                    <table id="datatable-1" class="table data-table table-striped table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Position</th>
-                                                                <th>Office</th>
-                                                                <th>Age</th>
-                                                                <th>Start date</th>
-                                                                <th class="text-right">Salary</th>
-                                                            </tr>
-                                                        </thead>
-                                                        </tfoot>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+@section('js_after')
+    <script>
+        $(document).ready(function() {
+            getDatatable();
+        });
 
+        let data_table = "";
 
-                                                        </tfoot>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        function getDatatable() {
+            data_table = $("#data-table").DataTable({
+                ajax: "{{ route('student.datatable') }}",
+                serverSide: true,
+                processing: true,
+                destroy: true,
+                order: [
+                    [6, 'desc']
+                ],
+                columns: [{
+                        "data": null,
+                        "sortable": false,
+                        searchable: false,
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        name: 'action',
+                        data: 'action'
+                    },
+                    {
+                        name: 'nim',
+                        data: 'nim'
+                    },
+                    {
+                        name: 'name',
+                        data: 'name'
+                    },
+                    {
+                        name: 'class',
+                        data: 'class'
+                    },
+                    {
+                        name: 'study_program',
+                        data: 'study_program'
+                    },
+                    {
+                        name: 'created_at',
+                        data: 'created_at'
+                    },
+                ],
+            });
+        }
+    </script>
 @endsection

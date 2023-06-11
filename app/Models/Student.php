@@ -11,14 +11,15 @@ class Student extends Model
 
     protected $guarded = ['id'];
 
-    // 
-    const STATUS_NOT_CONFIRMED = "Belum Dikonfirmasi";
-    const STATUS_APPROVED = "Disetujui";
-    const STATUS_REJECTED = "Ditolak";
+    //Gender
+    const GENDER_MAN = "Laki-laki";
+    const GENDER_WOMAN = "Perempuan";
 
-    const STATUS_CHOICE = [
-        self::STATUS_NOT_CONFIRMED => self::STATUS_NOT_CONFIRMED,
-        self::STATUS_APPROVED => self::STATUS_APPROVED,
-        self::STATUS_REJECTED => self::STATUS_REJECTED,
+    const GENDER_CHOICE = [
+        self::GENDER_MAN => self::GENDER_MAN,
+        self::GENDER_WOMAN => self::GENDER_WOMAN,
     ];
+
+    // Program Studi
+    const STUDY_PROGRAM_D3 = "D3 Manajemen Informatika";
 }

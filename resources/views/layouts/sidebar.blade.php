@@ -17,7 +17,7 @@
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="side-menu">
                 <li class="active sidebar-layout">
-                    <a href="backend/index.html" class="svg-icon">
+                    <a href="{{ route('home') }}" class="svg-icon">
                         <i class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -32,18 +32,6 @@
                 <li class="px-3 pt-3 pb-2">
                     <span class="text-uppercase small font-weight-bold">Profil Pengguna</span>
                 </li>
-                {{-- <li class=" sidebar-layout">
-                    <a href="app/user-profile.html" class="svg-icon">
-                        <i class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
-                            </svg>
-
-                        </i><span class="ml-2">Profil Mahasiswa</span>
-                    </a>
-                </li> --}}
                 <li class="sidebar-layout">
                     <a href="#app1" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
                         <i>
@@ -54,7 +42,7 @@
                             </svg>
 
                         </i>
-                        <span class="ml-2">Profil Mahasiswa</span>
+                        <span class="ml-2">Kelola Mahasiswa</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon iq-arrow-right arrow-active"
                             width="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -62,57 +50,13 @@
                     </a>
                     <ul id="app1" class="submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class=" sidebar-layout">
-                            <a href="backend/auth-login.html" class="svg-icon">
+                            <a href="{{ route('student.index') }}" class="svg-icon">
                                 <i class=""><svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
                                     </svg>
-                                </i><span class="">Login</span>
-                            </a>
-                        </li>
-                        <li class=" sidebar-layout">
-                            <a href="backend/auth-sign-up.html" class="svg-icon">
-                                <i class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                                    </svg>
-                                </i><span class="">Register</span>
-                            </a>
-                        </li>
-                        <li class=" sidebar-layout">
-                            <a href="backend/auth-recover-pwd.html" class="svg-icon">
-                                <i class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
-                                </i><span class="">Reset Password</span>
-                            </a>
-                        </li>
-                        <li class=" sidebar-layout">
-                            <a href="backend/auth-confirm-mail.html" class="svg-icon">
-                                <i class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </i><span class="">Confirm Mail</span>
-                            </a>
-                        </li>
-                        <li class=" sidebar-layout">
-                            <a href="backend/auth-lock-screen.html" class="svg-icon">
-                                <i class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </i><span class="">Lock Screen</span>
+                                </i><span class="">Mahasiswa</span>
                             </a>
                         </li>
                     </ul>
@@ -120,8 +64,8 @@
                 <li class="sidebar-layout">
                     <a href="#app6" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
                         <i>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
