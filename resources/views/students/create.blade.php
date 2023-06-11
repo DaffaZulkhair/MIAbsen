@@ -39,18 +39,18 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nim">Nama Lengkap : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
+                            <label for="name">Nama Lengkap : </label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ old('name') }}" required>
+                            @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nim">Kelas : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
+                            <label for="class">Kelas : </label>
+                            <input type="text" class="form-control" id="class" name="class"
+                                value="{{ old('class') }}" required>
+                            @error('class')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

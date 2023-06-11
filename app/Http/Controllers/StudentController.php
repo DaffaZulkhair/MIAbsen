@@ -53,6 +53,36 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+        try {
+            DB::beginTransaction();
+
+            $request->validate([
+                'user_id' => 'required',
+            ]);
+
+
+            $input = $request->all();
+
+            // Decrypt Data
+            $input['user_id'] = Crypt::decrypt($request->user_id);
+
+            // Create Data
+            Student::create($input);
+
+            // Save Data
+            DB::commit();
+
+            // Alert & Redirect
+            Alert::toast('Data Berhasil Disimpan', 'success');
+            return redirect()->route('student.index');
+        } catch (\Exception $e) {
+            // If Data Error
+            DB::rollBack();
+
+            // Alert & Redirect
+            Alert::toast('Data Tidak Tersimpan', 'error');
+            return redirect()->back()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
+        }
     }
 
     public function update($id, Request $request)
