@@ -64,23 +64,23 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nim">Tanggal Lahir : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
+                            <label for="birth_date">Tanggal Lahir : </label>
+                            <input type="date" class="form-control" id="birth_date" name="birth_date"
+                                value="{{ old('birth_date') }}" required>
+                            @error('birth_date')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nim">Tempat Lahir : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
+                            <label for="birth_place">Tempat Lahir : </label>
+                            <input type="text" class="form-control" id="birth_place" name="birth_place"
+                                value="{{ old('birth_place') }}" required>
+                            @error('birth_place')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nim">Program Studi : </label>
+                            <label for="study_program">Program Studi : </label>
                             <select class="form-control" name="gender" id="gender" required>
                                 <option style="font-color:darkgreen" selected>Pilih Program Studi</option>
                                 @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
@@ -89,18 +89,18 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nim">No. Handphone : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
+                            <label for="phone_number">No. Handphone : </label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                value="{{ old('phone_number') }}" required>
+                            @error('phone_number')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nim">No. Handphone Orang Tua : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
+                            <label for="parent_phone_number">No. Handphone Orang Tua : </label>
+                            <input type="text" class="form-control" id="parent_phone_number" name="parent_phone_number"
+                                value="{{ old('parent_phone_number') }}" required>
+                            @error('parent_phone_number')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -109,7 +109,7 @@
                             <textarea class="form-control" name="address" id="address" rows="2">{{ old('address') }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="nim">Agama : </label>
+                            <label for="religion">Agama : </label>
                             <select class="form-control" name="gender" id="gender" required>
                                 <option selected>Pilih Program Studi</option>
                                 @foreach (App\Models\Student::AGAMA_CHOICE as $key => $value)
@@ -118,10 +118,10 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nim">Tahun Masuk : </label>
-                            <input type="text" class="form-control" id="nim" name="nim"
-                                value="{{ old('nim') }}" required>
-                            @error('nim')
+                            <label for="entry_year">Tahun Masuk : </label>
+                            <input type="text" class="form-control" id="entry_year" name="entry_year"
+                                value="{{ old('entry_year') }}" required>
+                            @error('entry_year')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
