@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Carbon;
@@ -42,27 +43,23 @@ class StudentController extends Controller
 
     public function create()
     {
-        $students = Student::all();
-        return view('students.create', compact('students'));
+        $users = User::where('name', '!=', 'admin')->get();
+        return view('students.create', compact('users'));
     }
 
     public function edit()
     {
-
     }
 
     public function store(Request $request)
     {
-
     }
 
     public function update($id, Request $request)
     {
-
     }
 
     public function destroy($id)
     {
-
     }
 }

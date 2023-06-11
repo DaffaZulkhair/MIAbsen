@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('css_after')
+    {{-- Select 2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-sm-12 col-lg-12">
@@ -10,7 +15,21 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="{{ route('student.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="user_id">Nama Akun</label>
+                            <select class="form-control select_user" name="user_id" id="user_id" required>
+                                <option value="" selected>Pilih Akun</option>
+                                @foreach ($users as $item)
+                                    <option value="{{ Crypt::encrypt($item->id) }}">{{ $item->name }}</option>
+                                @endforeach
+                                @error('user_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="nim">NIM : </label>
                             <input type="number" class="form-control" id="nim" name="nim"
@@ -121,3 +140,12 @@
         </div>
     </div>
 @endsection
+@section('js_after')
+    {{-- Select 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".select_user").select2();
+        });
+    </script>
