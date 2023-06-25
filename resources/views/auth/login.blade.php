@@ -35,7 +35,7 @@
                                         class="img-fluid rounded-normal light-logo" alt="logo">
                                 </div>
                                 <h3 class="mb-3 font-weight-bold text-center">Selamat Datang</h3>
-                                <p class="text-center text-secondary mb-4">Log in to your account to continue</p>
+                                <p class="text-center text-secondary mb-4">Masukkan akun anda untuk lanjut</p>
                                 <div class="social-btn d-flex justify-content-around align-items-center mb-4">
                                     <button class="btn btn-outline-light">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -100,7 +100,7 @@
                                             <div class="form-group">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <label class="text-secondary">Password</label>
-                                                    <label><a href="auth-recover-pwd.html">Forgot Password?</a></label>
+                                                    <label><a href="auth-recover-pwd.html">Lupa Password?</a></label>
                                                 </div>
                                                 <input class="form-control" type="password"
                                                     placeholder="Masukkan Password" name="password"
@@ -113,11 +113,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-block mt-2" type="submit">Log
-                                        In</button>
+                                    <button type="submit" class="btn btn-primary btn-block mt-2"
+                                        type="submit">Masuk</button>
                                     <div class="col-lg-12 mt-3">
                                         <p class="mb-0 text-center">Tidak punya akun? <a
-                                                href="{{ route('register') }}">Sign Up</a></p>
+                                                href="{{ route('register') }}">Daftar Sekarang</a></p>
                                     </div>
                                 </form>
                             </div>
