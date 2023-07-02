@@ -10,7 +10,7 @@
 
         <div class="card-body">
             <div class="profile-card rounded">
-                <img src="{{ asset('assets/images/' . $data['photo']) }}" alt="{{ $data['name'] }}"
+                <img src="{{ asset('assets/images/mahasiswa/' . $data['photo']) }}" alt="{{ $data['name'] }}"
                     class="avatar-100 rounded d-block mx-auto img-fluid mb-3">
             </div>
             <hr>
@@ -37,6 +37,62 @@
                                 <div class="form-group mb-2">
                                     <label>Kelas</label>
                                     <input type="text" class="form-control" value="{{ $data['class'] }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Jenis Kelamin</label>
+                                    <input type="text" class="form-control" value="{{ $data['gender'] }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Tanggal Lahir</label>
+                                    <input type="text" class="form-control" value="{{ $data['birth_date'] }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Tempat Lahir</label>
+                                    <input type="text" class="form-control" value="{{ $data['birth_place'] }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Program Studi</label>
+                                    <input type="text" class="form-control" value="{{ $data['study_program'] }}"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Nomor Handphone</label>
+                                    <input type="text" class="form-control" value="{{ $data['phone_number'] }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Nomor Handphone Orangtua</label>
+                                    <input type="text" class="form-control" value="{{ $data['parent_phone_number'] }}"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Alamat</label>
+                                    <input type="text" class="form-control" value="{{ $data['address'] }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Agama</label>
+                                    <input type="text" class="form-control" value="{{ $data['religion'] }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label>Tahun Masuk</label>
+                                    <input type="text" class="form-control" value="{{ $data['entry_year'] }}" readonly>
                                 </div>
                             </div>
                         </div>
