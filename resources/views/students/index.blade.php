@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('css_after')
+    {{-- Select 2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -12,15 +14,37 @@
         </div>
         <div class="col-lg-12 col-md-12">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <div class="header-title">
-                                <h4 class="card-title">Kelola Mahasiswa</h4>
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Kelola Mahasiswa</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-2">Filter Kelas</h6>
+                                    <select id="filter_class" class="form-control">
+                                        <option value="">Semua Kelas</option>
+                                        @foreach (App\Models\Student::CLASS_CHOICE as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-2">Filter Semester</h6>
+                                    <select id="filter_semester" class="form-control">
+                                        <option value="">Semua Semester</option>
+                                        @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
-                                    class="fa fa-plus"></i> Tambah Data</a>
+
                         </div>
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="data-table" class="table table-striped table-bordered" width="100%">
@@ -48,16 +72,33 @@
 @endsection
 
 @section('js_after')
+    {{-- Select 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         $(document).ready(function() {
             getDatatable();
+            filter();
+            $("#filter_class").select2({
+                width: '100%'
+            });
+
+            $("#filter_semester").select2({
+                width: '100%'
+            });
         });
 
         let data_table = "";
 
         function getDatatable() {
             data_table = $("#data-table").DataTable({
-                ajax: "{{ route('student.datatable') }}",
+                ajax: {
+                    url: "{{ route('student.datatable') }}",
+                    data: {
+                        class: $("#filter_class").val(),
+                        semester: $("#filter_semester").val(),
+                    }
+                },
                 serverSide: true,
                 processing: true,
                 destroy: true,
@@ -98,6 +139,16 @@
                     },
                 ],
             });
+        }
+
+        function filter() {
+            $("#filter_semester").change(() => {
+                getDatatable();
+            })
+
+            $("#filter_class").change(() => {
+                getDatatable();
+            })
         }
     </script>
 @endsection

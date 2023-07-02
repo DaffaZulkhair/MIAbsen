@@ -46,4 +46,60 @@ class Student extends Model
         self::AGAMA_KONGHUCU => self::AGAMA_KONGHUCU,
 
     ];
+
+    // Kelas
+    const CLASS_IA = "IA";
+    const CLASS_IB = "IB";
+    const CLASS_IC = "IC";
+    const CLASS_ID = "ID";
+    const CLASS_IE = "IE";
+    const CLASS_IF = "IF";
+    const CLASS_IM = "IM";
+    const CLASS_IN = "IN";
+    const CLASS_MIA = "MIA";
+    const CLASS_MIB = "MIB";
+    const CLASS_MIC = "MIC";
+    const CLASS_MID = "MID";
+    const CLASS_MIM = "MIM";
+    const CLASS_MIN = "MIN";
+    const CLASS_MIG = "MIG";
+
+    const CLASS_CHOICE = [
+        self::CLASS_IA => self::CLASS_IA,
+        self::CLASS_IB => self::CLASS_IB,
+        self::CLASS_IC => self::CLASS_IC,
+        self::CLASS_ID => self::CLASS_ID,
+        self::CLASS_IE => self::CLASS_IE,
+        self::CLASS_IF => self::CLASS_IF,
+        self::CLASS_IM => self::CLASS_IM,
+        self::CLASS_IN => self::CLASS_IN,
+        self::CLASS_MIA => self::CLASS_MIA,
+        self::CLASS_MIB => self::CLASS_MIB,
+        self::CLASS_MIC => self::CLASS_MIC,
+        self::CLASS_MID => self::CLASS_MID,
+        self::CLASS_MIM => self::CLASS_MIM,
+        self::CLASS_MIN => self::CLASS_MIN,
+        self::CLASS_MIG => self::CLASS_MIG
+    ];
+
+    // Semester
+    const SEMESTER_1 = "1";
+    const SEMESTER_2 = "2";
+    const SEMESTER_3 = "3";
+    const SEMESTER_4 = "4";
+    const SEMESTER_5 = "5";
+    const SEMESTER_6 = "6";
+    const SEMESTER_7 = "7";
+    const SEMESTER_8 = "8";
+
+    const SEMESTER_CHOICE = [
+        self::SEMESTER_1 => self::SEMESTER_1,
+        self::SEMESTER_2 => self::SEMESTER_2,
+        self::SEMESTER_3 => self::SEMESTER_3,
+        self::SEMESTER_4 => self::SEMESTER_4,
+        self::SEMESTER_5 => self::SEMESTER_5,
+        self::SEMESTER_6 => self::SEMESTER_6,
+        self::SEMESTER_7 => self::SEMESTER_7,
+        self::SEMESTER_8 => self::SEMESTER_8,
+    ];
 }

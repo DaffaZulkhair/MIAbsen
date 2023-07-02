@@ -57,7 +57,6 @@
                                     <a href="#" class="nav-item nav-icon dropdown-toggle pr-0 search-toggle"
                                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                        <img src="assets/images/1.jpg" class="img-fluid avatar-rounded" alt="user">
                                         <span class="mb-0 ml-2 user-name">{{ Auth::user()->name }}</span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">

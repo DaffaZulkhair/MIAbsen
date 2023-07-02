@@ -23,9 +23,19 @@ class StudentController extends Controller
         return view('students.index');
     }
 
-    public function datatable()
+    public function datatable(Request $request)
     {
-        $model = Student::query();
+        $searchClass = $request->get('class');
+        $searchSemester = $request->get('semester');
+        $searchClassSemester = $searchSemester . " " . $searchClass;
+
+        $model = Student::query()
+            ->when(!empty($searchSemester), function ($query) use ($searchClassSemester) {
+                $query->where('class', $searchClassSemester);
+            })
+            ->when(!empty($searchClass), function ($query) use ($searchClassSemester) {
+                $query->where('class', $searchClassSemester);
+            });
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
                 $dateFormat = Carbon::parse($data['created_at'])->translatedFormat('d F Y - H:i');
@@ -53,8 +63,12 @@ class StudentController extends Controller
         return view('students.create', compact('users'));
     }
 
-    public function edit()
+    public function show($id)
     {
+        $id = Crypt::decrypt($id);
+        $data = Student::find($id);
+
+        return view('students.show', compact('data'));
     }
 
     public function store(Request $request)
@@ -66,7 +80,6 @@ class StudentController extends Controller
                 'user_id' => 'required',
             ]);
 
-
             $input = $request->all();
 
             // Decrypt Data
@@ -74,11 +87,13 @@ class StudentController extends Controller
 
             // Save Image
             if ($file = $request->file('photo')) {
-                $destinationPath = 'assets/images/';
+                $destinationPath = 'assets/images/mahasiswa/';
                 $fileName = "MAHASISWA" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
                 $file->move($destinationPath, $fileName);
                 $input['photo'] = $fileName;
             }
+
+            $input['class'] = $request->semester . " " . $request->class;
 
             // Create Data
             Student::create($input);
@@ -105,5 +120,27 @@ class StudentController extends Controller
 
     public function destroy($id)
     {
+        try {
+            DB::beginTransaction();
+
+            $id = Crypt::decrypt($id);
+            $student = Student::find($id);
+
+            $student->delete();
+
+            // Save Data
+            DB::commit();
+
+            // Alert & Redirect
+            Alert::toast('Data Berhasil Dihapus', 'success');
+            return redirect()->route('student.index');
+        } catch (\Exception $e) {
+            // If Data Error
+            DB::rollBack();
+
+            // Alert & Redirect
+            Alert::toast('Data Tidak Terhapus', 'error');
+            return redirect()->back()->with('error', 'Data Tidak Berhasil Dihapus' . $e->getMessage());
+        }
     }
 }
