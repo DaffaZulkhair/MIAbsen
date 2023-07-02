@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>MIabsen</title>
+    <title>Beranda | MIabsen</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
 
     <!-- Favicon -->
-    <link href="{{ asset('design/img/favicon.ico') }}" rel="icon" />
+    <link rel="shortcut icon" href="{{ asset('DATUM/assets/images/mi.png') }}" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,7 +59,8 @@
                     <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i
                             class="fab fa-facebook-f fw-normal"></i></a>
 
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2"
+                        href="https://instagram.com/jurusan.mi.polsri?igshid=MzRlODBiNWFlZA=="><i
                             class="fab fa-instagram fw-normal"></i></a>
                     <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i
                             class="fab fa-youtube fw-normal"></i></a>
@@ -72,13 +73,13 @@
     <!-- Navbar & Carousel Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0">
-                    <img src="{{ asset('design/img/polsri.png') }}" alt="" width="50" height="50" />
-                    <img src="{{ asset('design/img/mi.png') }}" alt="" width="50" height="50" />
 
-                </h1>
-            </a>
+            <h1 class="m-0">
+                <img src="{{ asset('design/img/polsri.png') }}" alt="" width="50" height="50" />
+                <img src="{{ asset('design/img/mi.png') }}" alt="" width="50" height="50" />
+
+            </h1>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
             </button>
@@ -98,12 +99,13 @@
                     <img class="w-100" src="{{ asset('design/img/jurusan.jpg') }}" alt="Image" height="50%" />
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px">
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">
-                                SELAMAT DATANG DI
-                            </h5>
+
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
-                                Absensi Mahasiswa MI
+                                SELAMAT DATANG
                             </h1>
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">
+                                Klik tombol masuk dibawah untuk halaman selanjutnya
+                            </h5>
                             <a href="{{ route('login') }}"
                                 class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Masuk</a>
                         </div>
@@ -202,19 +204,18 @@
                     <div class="row g-0 mb-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
                             <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Award Winning
+                                <i class="fa fa-check text-primary me-3"></i>Tepat Waktu
                             </h5>
                             <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Professional
-                                Staff
+                                <i class="fa fa-check text-primary me-3"></i>Sesuai Tempat
                             </h5>
                         </div>
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
                             <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>24/7 Support
+                                <i class="fa fa-check text-primary me-3"></i>Data Akurat
                             </h5>
                             <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Fair Prices
+                                <i class="fa fa-check text-primary me-3"></i>Mudah Terpantau
                             </h5>
                         </div>
                     </div>
@@ -231,7 +232,7 @@
                     <a href="quote.html" class="btn btn-primary py-3 px-5 mt-3 wow zoomIn"
                         data-wow-delay="0.9s">Hubungi</a>
                 </div>
-                <div class="col-lg-5" style="min-height: 500px">
+                <div class="col-lg-5" style="min-height: 350px">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
                             src="{{ asset('design/img/logomiabsen.png') }}" style="object-fit: cover" />
