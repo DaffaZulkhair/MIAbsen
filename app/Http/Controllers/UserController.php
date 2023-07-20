@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lecturer;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -72,7 +74,9 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::where('name', '!=', 'Dosen')
+            ->where('name', '!=', 'Mahasiswa')
+            ->pluck('name', 'name');
         return view('users.add', compact('roles'));
     }
 
@@ -112,6 +116,15 @@ class UserController extends Controller
             // Create Data
             $input = $request->all();
             $input['password'] = Hash::make($input['password']);
+
+            // Save Image
+            if ($file = $request->file('photo')) {
+                $destinationPath = 'assets/files/';
+                $fileName = "User" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $file->move($destinationPath, $fileName);
+                $input['photo'] = $fileName;
+            }
+
             $user = User::create($input);
             $user->assignRole($request->input('roles'));
 
@@ -158,13 +171,26 @@ class UserController extends Controller
 
             $user = User::find($id);
 
+            if ($file = $request->file('photo')) {
+                // Remove Old File
+                if (!empty($user['photo'])) {
+                    $file_exist = 'assets/files/' . $user['photo'];
+
+                    if (file_exists($file_exist)) {
+                        unlink($file_exist);
+                    }
+                }
+
+                // Store New File
+                $destinationPath = 'assets/files/';
+                $fileName = "USER" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $file->move($destinationPath, $fileName);
+                $input['photo'] = $fileName;
+            } else {
+                unset($input['photo']);
+            }
+
             $user->update($input);
-
-            DB::table('model_has_roles')
-                ->where('model_id', $id)
-                ->delete();
-
-            $user->assignRole($request->roles);
 
             // Save Data
             DB::commit();
@@ -199,6 +225,18 @@ class UserController extends Controller
                 return redirect()->back();
             } else {
                 $user->delete();
+
+                // Hapus Mahasiswa
+                $student = Student::where('user_id', $id)->first();
+                if ($student) {
+                    $student->delete();
+                }
+
+                // Hapus Dosen
+                $lecturer = Lecturer::where('user_id', $id)->first();
+                if ($lecturer) {
+                    $lecturer->delete();
+                }
             }
 
             // Save Data

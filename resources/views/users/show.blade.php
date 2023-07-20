@@ -24,8 +24,14 @@
                     <div class="card card-block p-card">
                         <div class="profile-box">
                             <div class="profile-card rounded">
-                                <img src="{{ asset('assets/images/user.png') }}" alt="{{ $user['name'] }}"
-                                    class="avatar-100 rounded d-block mx-auto img-fluid mb-3">
+                                @if (!empty($user['photo']))
+                                    <div class="profile-card rounded">
+                                        <img src="{{ asset('assets/files/' . $user['photo']) }}" alt="{{ $user['photo'] }}"
+                                            class="avatar-100 rounded d-block mx-auto img-fluid mb-3">
+                                    </div>
+                                @else
+                                    <h5 class="text-center text-white">Belum Ada Foto</h5>
+                                @endif
                                 <h3 class="font-600 text-white text-center mb-4">{{ $user['name'] }}</h3>
                             </div>
                             <div class="pro-content rounded">

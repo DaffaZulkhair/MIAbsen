@@ -102,4 +102,9 @@ class Student extends Model
         self::SEMESTER_7 => self::SEMESTER_7,
         self::SEMESTER_8 => self::SEMESTER_8,
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

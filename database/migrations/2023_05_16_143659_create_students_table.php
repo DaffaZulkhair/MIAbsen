@@ -26,7 +26,6 @@ return new class extends Migration
             $table->text('address')->nullable()->comment('alamat');
             $table->string('religion')->nullable()->comment('agama');
             $table->integer('entry_year')->comment('tahun masuk');
-            $table->string('photo')->nullable()->comment('foto');
             $table->timestamps();
         });
     }

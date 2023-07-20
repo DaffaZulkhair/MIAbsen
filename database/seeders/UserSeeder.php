@@ -31,5 +31,21 @@ class UserSeeder extends Seeder
 
         $user->assignRole([$role->id]);
 
+        /* Mahasiswa & Pimpinan */
+        $roles = [
+            [
+                'name' => 'Mahasiswa',
+            ],
+            [
+                'name' => 'Dosen',
+            ],
+            [
+                'name' => 'Pimpinan'
+            ]
+        ];
+
+        foreach ($roles as $item) {
+            Role::create($item);
+        }
     }
 }

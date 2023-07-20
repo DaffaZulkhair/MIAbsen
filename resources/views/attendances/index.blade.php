@@ -1,24 +1,26 @@
 @extends('layouts.app')
 
 @section('css_after')
+    {{-- Select 2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-12 mb-4 mt-1">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <h4 class="font-weight-bold">Role</h4>
+                <h4 class="font-weight-bold">Dosen</h4>
             </div>
         </div>
         <div class="col-lg-12 col-md-12">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Manajemen Role</h4>
+                                <h4 class="card-title">Kelola Dosen</h4>
                             </div>
-                            <a class="text-end btn btn-sm btn-outline-info" href="{{ route('role.create') }}"><i
+                            <a class="btn btn-sm btn-outline-info" href="{{ route('lecturer.create') }}"><i
                                     class="fa fa-plus"></i> Tambah Data</a>
                         </div>
                         <div class="card-body">
@@ -28,8 +30,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Aksi</th>
-                                            <th>Nama Role</th>
-                                            <th>Diinput pada</th>
+                                            <th>NIP</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Jenis Kelamin</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,22 +48,27 @@
 @endsection
 
 @section('js_after')
+    {{-- Select 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         $(document).ready(function() {
             getDatatable();
+
         });
 
         let data_table = "";
 
         function getDatatable() {
             data_table = $("#data-table").DataTable({
-                ajax: "{{ route('role.datatable') }}",
+                ajax: {
+                    url: "{{ route('lecturer.datatable') }}",
+
+                },
                 serverSide: true,
                 processing: true,
                 destroy: true,
-                order: [
-                    [2, 'desc']
-                ],
+
                 columns: [{
                         "data": null,
                         "sortable": false,
@@ -74,13 +82,18 @@
                         data: 'action'
                     },
                     {
+                        name: 'nip',
+                        data: 'nip'
+                    },
+                    {
                         name: 'name',
                         data: 'name'
                     },
                     {
-                        name: 'created_at',
-                        data: 'created_at'
+                        name: 'gender',
+                        data: 'gender'
                     },
+
                 ],
             });
         }

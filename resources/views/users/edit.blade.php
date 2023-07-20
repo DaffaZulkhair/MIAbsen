@@ -24,6 +24,11 @@
             <form action="{{ route('user.update', Crypt::encrypt($user['id'])) }}" method="post">
                 @csrf
                 @method('put')
+                <h5>Peran : </h5>
+                @foreach ($user->getRoleNames() as $item)
+                    <span class="badge bg-primary">{{ $item }}</span>
+                @endforeach
+                <br><br>
                 <div class="form-group">
                     <label for="name">Nama Lengkap </label>
                     <input type="text" name="name" class="form-control" id="name"
@@ -39,6 +44,8 @@
                     <input type="email" name="email" class="form-control" id="email"
                         value="{{ old('email', $user['email']) }}" placeholder="Email..." required>
                 </div>
+                <hr>
+                <p>*Isi jika ingin mengganti password</p>
                 <div class="form-group">
                     <label for="password">Password </label>
                     <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}"
@@ -49,15 +56,12 @@
                     <input type="password" name="confirm-password" class="form-control" id="confirm-password"
                         value="{{ old('confirm-password') }}" placeholder="Konfirmasi Password..." required>
                 </div>
-                <hr>
                 <div class="form-group">
-                    <label>Role </label>
-                    <select name="roles[]" class="form-control mb-3 select_role" multiple required>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role }}" {{ in_array($role, $userRole) ? 'selected' : '' }}>
-                                {{ $role }}</option>
-                        @endforeach
-                    </select>
+                    <label for="file">Masukkan Foto</label>
+                    <div class="custom-file">
+                        <input type="file" name="photo" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Pilih File</label>
+                    </div>
                 </div>
                 <a href="{{ route('user.index') }}" class="btn btn-warning">Kembali</a>
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>

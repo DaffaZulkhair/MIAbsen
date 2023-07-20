@@ -18,11 +18,16 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="header-title">
                                         <h4 class="card-title">Kelola Mahasiswa</h4>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
+                                            class="fa fa-plus"></i> Tambah Data</a>
+                                </div>
+                                <br><br>
                                 <div class="col-md-6">
                                     <h6 class="mb-2">Filter Kelas</h6>
                                     <select id="filter_class" class="form-control">

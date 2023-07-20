@@ -48,10 +48,17 @@
                     <input type="password" name="confirm-password" class="form-control" id="confirm-password"
                         value="{{ old('confirm-password') }}" placeholder="Konfirmasi Password..." required>
                 </div>
+                <div class="form-group">
+                    <label for="file">Masukkan Foto</label>
+                    <div class="custom-file">
+                        <input type="file" name="photo" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Pilih File</label>
+                    </div>
+                </div>
                 <hr>
                 <div class="form-group">
                     <label>Role </label>
-                    <select name="roles[]" class="form-control mb-3 select_role" multiple required>
+                    <select name="roles[]" class="form-control mb-3 select_role" required>
                         @foreach ($roles as $role)
                             <option value="{{ $role }}">{{ $role }}</option>
                         @endforeach

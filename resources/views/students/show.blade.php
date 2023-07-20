@@ -9,11 +9,6 @@
         </div>
 
         <div class="card-body">
-            <div class="profile-card rounded">
-                <img src="{{ asset('assets/images/mahasiswa/' . $data['photo']) }}" alt="{{ $data['name'] }}"
-                    class="avatar-100 rounded d-block mx-auto img-fluid mb-3">
-            </div>
-            <hr>
             <div class="form-group">
                 <div class="card">
                     <div class="card-header">

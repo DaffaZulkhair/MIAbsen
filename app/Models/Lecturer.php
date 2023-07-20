@@ -19,4 +19,9 @@ class Lecturer extends Model
         self::GENDER_MAN => self::GENDER_MAN,
         self::GENDER_WOMAN => self::GENDER_WOMAN,
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

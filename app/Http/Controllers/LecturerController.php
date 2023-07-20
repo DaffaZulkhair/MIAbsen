@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\User;
 
 class LecturerController extends Controller
 {
@@ -23,22 +24,18 @@ class LecturerController extends Controller
         return view('lecturers.index');
     }
 
-    public function datatable(Request $request)
+    public function datatable()
     {
-
-
         $model = Lecturer::query();
 
         return DataTables::of($model)
             ->addColumn('action', function ($data) {
 
                 $url_edit = route('lecturer.edit', Crypt::encrypt($data->id));
-                $url_delete = route('lecturer.destroy', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
 
                 $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
-                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
                 $btn .= "</div>";
 
                 return $btn;
@@ -67,17 +64,33 @@ class LecturerController extends Controller
             DB::beginTransaction();
 
             $request->validate([
-
-                'nip' => 'required',
                 'name' => 'required',
+                'username' => 'required',
+                'photo' => 'mimes: jpg,jpeg,png|max:1024',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|same:confirm-password',
+                'nip' => 'required',
+                'lecturer_name' => 'required',
                 'gender' => 'required'
             ]);
 
             $input = $request->all();
 
-            // Decrypt Data
-            $input['user_id'] = Auth::user()->id;
+            // Save Image
+            if ($file = $request->file('photo')) {
+                $destinationPath = 'assets/files/';
+                $fileName = "User" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $file->move($destinationPath, $fileName);
+                $input['photo'] = $fileName;
+            }
 
+            // Create User
+            $user = User::create($input);
+
+            $user->assignRole([3]);
+
+            $input['name'] = $request->lecturer_name;
+            $input['user_id'] = $user->id;
 
             // Create Data
             Lecturer::create($input);
@@ -134,32 +147,6 @@ class LecturerController extends Controller
             // Alert & Redirect
             Alert::toast('Data Tidak Tersimpan', 'error');
             return redirect()->back()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
-        }
-    }
-
-    public function destroy($id)
-    {
-        try {
-            DB::beginTransaction();
-
-            $id = Crypt::decrypt($id);
-            $lecturer = Lecturer::find($id);
-
-            $lecturer->delete();
-
-            // Save Data
-            DB::commit();
-
-            // Alert & Redirect
-            Alert::toast('Data Berhasil Dihapus', 'success');
-            return redirect()->route('lecturer.index');
-        } catch (\Exception $e) {
-            // If Data Error
-            DB::rollBack();
-
-            // Alert & Redirect
-            Alert::toast('Data Tidak Terhapus', 'error');
-            return redirect()->back()->with('error', 'Data Tidak Berhasil Dihapus' . $e->getMessage());
         }
     }
 }

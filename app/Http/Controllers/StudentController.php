@@ -44,12 +44,10 @@ class StudentController extends Controller
             ->addColumn('action', function ($data) {
                 $url_show = route('student.show', Crypt::encrypt($data->id));
                 $url_edit = route('student.edit', Crypt::encrypt($data->id));
-                $url_delete = route('student.destroy', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
                 $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
                 $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
-                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
                 $btn .= "</div>";
 
                 return $btn;
@@ -59,8 +57,15 @@ class StudentController extends Controller
 
     public function create()
     {
-        $users = User::where('name', '!=', 'admin')->get();
-        return view('students.create', compact('users'));
+        return view('students.create');
+    }
+
+    public function edit($id)
+    {
+        $id = Crypt::decrypt($id);
+        $data = Student::find($id);
+
+        return view('students.edit', compact('data'));
     }
 
     public function show($id)
@@ -77,22 +82,30 @@ class StudentController extends Controller
             DB::beginTransaction();
 
             $request->validate([
-                'user_id' => 'required',
+                'name' => 'required',
+                'username' => 'required',
+                'photo' => 'mimes: jpg,jpeg,png|max:1024',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|same:confirm-password',
             ]);
 
             $input = $request->all();
 
-            // Decrypt Data
-            $input['user_id'] = Crypt::decrypt($request->user_id);
-
             // Save Image
             if ($file = $request->file('photo')) {
-                $destinationPath = 'assets/images/mahasiswa/';
-                $fileName = "MAHASISWA" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $destinationPath = 'assets/files/';
+                $fileName = "User" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
                 $file->move($destinationPath, $fileName);
                 $input['photo'] = $fileName;
             }
 
+            // Create User
+            $user = User::create($input);
+
+            $user->assignRole([2]);
+
+            $input['name'] = $request->student_name;
+            $input['user_id'] = $user->id;
             $input['class'] = $request->semester . " " . $request->class;
 
             // Create Data
@@ -116,31 +129,30 @@ class StudentController extends Controller
 
     public function update($id, Request $request)
     {
-    }
-
-    public function destroy($id)
-    {
         try {
             DB::beginTransaction();
 
             $id = Crypt::decrypt($id);
             $student = Student::find($id);
 
-            $student->delete();
+            $input = $request->all();
+
+            // Update Data
+            $student->update($input);
 
             // Save Data
             DB::commit();
 
             // Alert & Redirect
-            Alert::toast('Data Berhasil Dihapus', 'success');
+            Alert::toast('Data Berhasil Disimpan', 'success');
             return redirect()->route('student.index');
         } catch (\Exception $e) {
             // If Data Error
             DB::rollBack();
 
             // Alert & Redirect
-            Alert::toast('Data Tidak Terhapus', 'error');
-            return redirect()->back()->with('error', 'Data Tidak Berhasil Dihapus' . $e->getMessage());
+            Alert::toast('Data Tidak Tersimpan', 'error');
+            return redirect()->back()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
         }
     }
 }

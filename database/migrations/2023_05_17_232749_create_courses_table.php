@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code')->comment('kode');
             $table->string('name')->comment('nama');
             $table->integer('sks')->comment('sks');
-            $table->integer('total_hour')->comment('jumlah jam');
+            $table->integer('total_hour')->comment('Total Jam');
             $table->timestamps();
         });
     }
