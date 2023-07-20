@@ -104,7 +104,7 @@
                                 SELAMAT DATANG
                             </h1>
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">
-                                Klik tombol masuk dibawah untuk halaman selanjutnya
+                                Di Website Jurusan Manajemen Informatika
                             </h5>
                             <a href="{{ route('login') }}"
                                 class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Masuk</a>

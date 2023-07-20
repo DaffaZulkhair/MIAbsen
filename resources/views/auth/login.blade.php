@@ -35,8 +35,8 @@
                                         class="img-fluid rounded-normal light-logo" alt="logo">
                                 </div>
                                 <h3 class="mb-3 font-weight-bold text-center">Selamat Datang</h3>
-                                <p class="text-center text-secondary mb-4">Masukkan akun anda</p>
-                                <div class="social-btn d-flex justify-content-around align-items-center mb-4">
+                                {{-- <p class="text-center text-secondary mb-4">Silahkan Masukkan Akun Anda</p> --}}
+                                {{-- <div class="social-btn d-flex justify-content-around align-items-center mb-4">
                                     <button class="btn btn-outline-light">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="88.428 12.828 107.543 207.085">
@@ -70,10 +70,10 @@
                                                 style="fill:#3BA9EE;" />
                                         </svg>
                                     </button>
-                                </div>
+                                </div> --}}
                                 <div class="mb-5">
-                                    <p class="line-around text-secondary mb-0"><span class="line-around-1">or login with
-                                            email</span></p>
+                                    <p class="line-around text-secondary mb-0"><span class="line-around-1">Silahkan
+                                            Masukkan Akun Anda</span></p>
                                 </div>
 
                                 @if (session('error'))

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\LecturerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,19 @@ Route::group(['controller' => StudentController::class, 'prefix' => 'student', '
     Route::put('/update/{id}', 'update')->name('update');
     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
 });
+
+// Dosen
+Route::group(['controller' => LecturerController::class, 'prefix' => 'lecturer', 'as' => 'lecturer.'], function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/datatable', 'datatable')->name('datatable');
+    Route::post('/store', 'store')->name('store');
+    Route::put('/update/{id}', 'update')->name('update');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+});
+
 
 // User
 Route::group(['controller' => UserController::class, 'prefix' => 'user', 'as' => 'user.'], function () {
