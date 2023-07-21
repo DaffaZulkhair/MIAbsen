@@ -1,15 +1,10 @@
 @extends('layouts.app')
 
-@section('css_after')
-    {{-- Select 2 --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endsection
-
 @section('content')
     <div class="row">
         <div class="col-md-12 mb-4 mt-1">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <h4 class="font-weight-bold">Dosen</h4>
+                <h4 class="font-weight-bold">Mata Kuliah</h4>
             </div>
         </div>
         <div class="col-lg-12 col-md-12">
@@ -18,9 +13,9 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Kelola Dosen</h4>
+                                <h4 class="card-title">Kelola Mata Kuliah</h4>
                             </div>
-                            <a class="btn btn-sm btn-outline-info" href="{{ route('lecturer.create') }}"><i
+                            <a class="btn btn-sm btn-outline-info" href="{{ route('course.create') }}"><i
                                     class="fa fa-plus"></i> Tambah Data</a>
                         </div>
                         <div class="card-body">
@@ -30,9 +25,11 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Aksi</th>
-                                            <th>NIP</th>
-                                            <th>Nama Lengkap</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>Program Studi</th>
+                                            <th>Kode</th>
+                                            <th>Nama</th>
+                                            <th>SKS</th>
+                                            <th>Total Jam</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,9 +45,6 @@
 @endsection
 
 @section('js_after')
-    {{-- Select 2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <script>
         $(document).ready(function() {
             getDatatable();
@@ -62,7 +56,7 @@
         function getDatatable() {
             data_table = $("#data-table").DataTable({
                 ajax: {
-                    url: "{{ route('lecturer.datatable') }}",
+                    url: "{{ route('course.datatable') }}",
 
                 },
                 serverSide: true,
@@ -82,18 +76,25 @@
                         data: 'action'
                     },
                     {
-                        name: 'nip',
-                        data: 'nip'
+                        name: 'study_program',
+                        data: 'study_program'
+                    },
+                    {
+                        name: 'code',
+                        data: 'code'
                     },
                     {
                         name: 'name',
                         data: 'name'
                     },
                     {
-                        name: 'gender',
-                        data: 'gender'
+                        name: 'sks',
+                        data: 'sks'
                     },
-
+                    {
+                        name: 'total_hour',
+                        data: 'total_hour'
+                    },
                 ],
             });
         }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -98,6 +99,8 @@ class StudentController extends Controller
                 $file->move($destinationPath, $fileName);
                 $input['photo'] = $fileName;
             }
+
+            $input['password'] = Hash::make($input['password']);
 
             // Create User
             $user = User::create($input);

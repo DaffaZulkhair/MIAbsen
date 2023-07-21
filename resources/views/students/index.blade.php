@@ -16,40 +16,33 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="header-title">
-                                        <h4 class="card-title">Kelola Mahasiswa</h4>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
-                                            class="fa fa-plus"></i> Tambah Data</a>
-                                </div>
-                                <br><br>
-                                <div class="col-md-6">
-                                    <h6 class="mb-2">Filter Kelas</h6>
-                                    <select id="filter_class" class="form-control">
-                                        <option value="">Semua Kelas</option>
-                                        @foreach (App\Models\Student::CLASS_CHOICE as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="mb-2">Filter Semester</h6>
-                                    <select id="filter_semester" class="form-control">
-                                        <option value="">Semua Semester</option>
-                                        @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+                                <h4 class="card-title">Kelola Mahasiswa</h4>
                             </div>
-
+                            <a class="btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
+                                    class="fa fa-plus"></i> Tambah Data</a>
                         </div>
-
+                        <div class="row m-2">
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Filter Kelas</h6>
+                                <select class="form-control select2">
+                                    <option value="">Semua Kelas</option>
+                                    @foreach (App\Models\Student::CLASS_CHOICE as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Filter Semester</h6>
+                                <select class="form-control select2">
+                                    <option value="">Semua Semester</option>
+                                    @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="data-table" class="table table-striped table-bordered" width="100%">
@@ -84,12 +77,9 @@
         $(document).ready(function() {
             getDatatable();
             filter();
-            $("#filter_class").select2({
-                width: '100%'
-            });
-
-            $("#filter_semester").select2({
-                width: '100%'
+            $(".select2").select2({
+                width: '100%',
+                theme: 'classic'
             });
         });
 

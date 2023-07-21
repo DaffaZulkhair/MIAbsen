@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('class')->comment('kelas');
             $table->bigInteger('course_id')->comment('foreign key course');
+            $table->string('course_name')->comment('nama mata kuliah')->nullable();
             $table->bigInteger('lecturer_id')->comment('foreign key lecturer');
+            $table->string('lecturer_name')->comment('nama dosen')->nullable();
             $table->date('date')->comment('hari');
             $table->time('time_start')->comment('jam mulai');
             $table->time('time_end')->comment('jam selesai');

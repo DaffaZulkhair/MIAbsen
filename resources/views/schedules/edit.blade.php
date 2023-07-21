@@ -11,46 +11,67 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Edit Data Dosen</h4>
+                        <h4 class="card-title">Tambah Jadwal Kuliah</h4>
                     </div>
                 </div>
                 <div class="card-body">
                     @if (session('error'))
                         <span class="text-danger">{{ session('error') }}</span>
                     @endif
-                    <form action="{{ route('lecturer.update', Crypt::encrypt($data['id'])) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('schedule.update', Crypt::encrypt($data->id)) }}" method="POST">
                         @csrf
                         @method('put')
-                        <div class="form-group">
-                            <label for="nip">NIP : </label>
-                            <input type="number" class="form-control" id="nip" name="nip"
-                                value="{{ old('nip', $data['nip']) }}" required>
-                            @error('nip')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <h5>Kelas : {{ $data->class }}</h5>
+                            </div>
+                            <br><br>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="course_id">Mata Kuliah : </label>
+                                    <select class="form-control select2" name="course_id" id="course_id" required>
+                                        @foreach ($courses as $item)
+                                            <option value="{{ Crypt::encrypt($item->id) }}"
+                                                {{ $item->id == $data->course_id ? 'selected' : '' }}>{{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lecturer_id">Dosen : </label>
+                                    <select class="form-control select2" name="lecturer_id" id="lecturer_id" required>
+                                        <option value="" selected>Pilih Dosen</option>
+                                        @foreach ($lecturers as $item)
+                                            <option value="{{ Crypt::encrypt($item->id) }}"
+                                                {{ $item->id == $data->lecturer_id ? 'selected' : '' }}>
+                                                {{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="date">Tanggal</label>
+                                    <input type="date" class="form-control" name="date" id="date" value="{{ $data->date }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="time_start">Jam Mulai</label>
+                                    <input type="time" class="form-control" name="time_start" id="date" value="{{ $data->time_start }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="time_end">Jam Selesai</label>
+                                    <input type="time" class="form-control" name="time_end" id="date" value="{{ $data->time_end }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="name">Nama Lengkap : </label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ old('name', $data['nip']) }}" required>
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gender">Jenis Kelamin : </label>
-                            <select class="form-control" name="gender" id="gender" required>
-                                <option value="" selected>Jenis Kelamin</option>
-                                @foreach (App\Models\Lecturer::GENDER_CHOICE as $key => $value)
-                                    <option value="{{ $key }}" {{ $key == $data['gender'] ? 'selected' : '' }}>
-                                        {{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <a href="{{ route('lecturer.index') }}" class="btn bg-danger">Kembali</a>
+                        <br>
+                        <a href="{{ route('schedule.index') }}" class="btn bg-danger">Kembali</a>
                         <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     </form>
                 </div>
@@ -60,4 +81,13 @@
 @endsection
 
 @section('js_after')
+    {{-- Select 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(".select2").select2({
+            width: '100%',
+            theme: 'classic'
+        });
+    </script>
 @endsection

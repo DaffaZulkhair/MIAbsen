@@ -1,10 +1,5 @@
 @extends('layouts.app')
 
-@section('css_after')
-    {{-- Select 2 --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endsection
-
 @section('content')
     <div class="row">
         <div class="col-md-12 mb-4 mt-1">
@@ -48,9 +43,6 @@
 @endsection
 
 @section('js_after')
-    {{-- Select 2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <script>
         $(document).ready(function() {
             getDatatable();
