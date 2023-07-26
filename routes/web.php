@@ -65,10 +65,14 @@ Route::group(['controller' => CourseController::class, 'prefix' => 'course', 'as
 Route::group(['controller' => AttendanceController::class, 'prefix' => 'attendance', 'as' => 'attendance.'], function () {
     Route::get('/', 'index')->name('index');
     Route::get('/verification', 'verification')->name('verification');
+    Route::get('/show_verification/{id}', 'show_verification')->name('show_verification');
     Route::get('/report', 'report')->name('report');
+    Route::get('/create', 'create')->name('create');
     Route::get('/present/{id}', 'present')->name('present');
     Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/show/{id}', 'show')->name('show');
     Route::get('/datatable', 'datatable')->name('datatable');
+    Route::get('/datatable_verification', 'datatable_verification')->name('datatable_verification');
     Route::post('/store', 'store')->name('store');
     Route::put('/update/{id}', 'update')->name('update');
     Route::put('/update_verification/{id}', 'update_verification')->name('update_verification');

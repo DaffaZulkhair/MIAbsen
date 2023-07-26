@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12 mb-4 mt-1">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <h4 class="font-weight-bold">Dosen</h4>
+                <h4 class="font-weight-bold">Kehadiran</h4>
             </div>
         </div>
         <div class="col-lg-12 col-md-12">
@@ -18,10 +18,8 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Kelola Dosen</h4>
+                                <h4 class="card-title">Kelola Kehadiran</h4>
                             </div>
-                            <a class="btn btn-sm btn-outline-info" href="{{ route('lecturer.create') }}"><i
-                                    class="fa fa-plus"></i> Tambah Data</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -30,9 +28,11 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Aksi</th>
-                                            <th>NIP</th>
-                                            <th>Nama Lengkap</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>Nama</th>
+                                            <th>Dosen</th>
+                                            <th>Mata Kuliah</th>
+                                            <th>Status</th>
+                                            <th>Tanggal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,7 +54,6 @@
     <script>
         $(document).ready(function() {
             getDatatable();
-
         });
 
         let data_table = "";
@@ -62,13 +61,14 @@
         function getDatatable() {
             data_table = $("#data-table").DataTable({
                 ajax: {
-                    url: "{{ route('lecturer.datatable') }}",
-
+                    url: "{{ route('attendance.datatable') }}"
                 },
                 serverSide: true,
                 processing: true,
                 destroy: true,
-
+                order: [
+                    [6, 'desc']
+                ],
                 columns: [{
                         "data": null,
                         "sortable": false,
@@ -82,18 +82,25 @@
                         data: 'action'
                     },
                     {
-                        name: 'nip',
-                        data: 'nip'
+                        name: 'student_name',
+                        data: 'student_name'
                     },
                     {
-                        name: 'name',
-                        data: 'name'
+                        name: 'schedule_lecturer_name',
+                        data: 'schedule_lecturer_name'
                     },
                     {
-                        name: 'gender',
-                        data: 'gender'
+                        name: 'schedule_course_name ',
+                        data: 'schedule_course_name '
                     },
-
+                    {
+                        name: 'status',
+                        data: 'status'
+                    },
+                    {
+                        name: 'created_at',
+                        data: 'created_at'
+                    },
                 ],
             });
         }

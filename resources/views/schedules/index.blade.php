@@ -57,13 +57,11 @@
         function getDatatable() {
             data_table = $("#data-table").DataTable({
                 ajax: {
-                    url: "{{ route('schedule.datatable') }}",
-
+                    url: "{{ route('schedule.datatable') }}"
                 },
                 serverSide: true,
                 processing: true,
                 destroy: true,
-
                 columns: [{
                         "data": null,
                         "sortable": false,

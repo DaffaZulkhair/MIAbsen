@@ -10,7 +10,6 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ScheduleController extends Controller
@@ -137,8 +136,6 @@ class ScheduleController extends Controller
 
             $input['course_id'] = Crypt::decrypt($input['course_id']);
             $input['lecturer_id'] = Crypt::decrypt($input['lecturer_id']);
-
-            $input['class'] = $request->semester . " " . $request->class;
 
             // Update Data
             $schedule->update($input);
