@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Course;
 use Illuminate\Http\Request;
-use App\Models\Lecturer;
 use App\Models\Schedule;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
@@ -14,8 +13,7 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
-use Illuminate\Support\Facades\Schema;
-use PHPUnit\Framework\Constraint\Count;
+use Attribute;
 
 class AttendanceController extends Controller
 {
@@ -39,7 +37,7 @@ class AttendanceController extends Controller
         $id = Crypt::decrypt($id);
         $data = Attendance::find($id);
 
-        return view('attendances.verification', compact('data'));
+        return view('attendances.show_verification', compact('data'));
     }
 
     public function datatable()
@@ -82,7 +80,9 @@ class AttendanceController extends Controller
 
     public function datatable_verification()
     {
-        $model = Attendance::where('status', Attendance::STATUS_NOT_CONFIRMED);
+        $model = Attendance::where('status', Attendance::STATUS_CANT_PRESENT)
+            ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
+            ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PERMIT);
 
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
@@ -136,6 +136,63 @@ class AttendanceController extends Controller
         return view('attendances.present', compact('data', 'student'));
     }
 
+    public function update_verification($id, Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $id = Crypt::decrypt($id);
+            $attendance = Attendance::find($id);
+
+            if ($request->type == Attendance::STATUS_ABSENT) {
+                $score_hour = $attendance->total_hour * 50;
+            } else {
+                $score_hour = 0;
+            }
+
+            if ($request->type == Attendance::STATUS_ABSENT) {
+                $attendance->update([
+                    'score_hour' => $score_hour,
+                    'status' => Attendance::STATUS_ABSENT
+                ]);
+            } elseif ($request->type == Attendance::STATUS_PRESENT) {
+                $attendance->update([
+                    'score_hour' => $score_hour,
+                    'status' => Attendance::STATUS_PRESENT
+                ]);
+            } elseif ($request->type == Attendance::STATUS_LATE) {
+                $attendance->update([
+                    'score_hour' => $score_hour,
+                    'status' => Attendance::STATUS_LATE
+                ]);
+            } elseif ($request->type == Attendance::STATUS_PERMIT) {
+                $attendance->update([
+                    'score_hour' => $score_hour,
+                    'status' => Attendance::STATUS_PERMIT
+                ]);
+            } elseif ($request->type == Attendance::STATUS_SICK) {
+                $attendance->update([
+                    'score_hour' => $score_hour,
+                    'status' => Attendance::STATUS_SICK
+                ]);
+            }
+
+            // Save Data
+            DB::commit();
+
+            // Alert & Redirect
+            Alert::toast('Data Berhasil Disimpan', 'success');
+            return redirect()->route('attendance.verification');
+        } catch (\Exception $e) {
+            // If Data Error
+            DB::rollBack();
+
+            // Alert & Redirect
+            Alert::toast('Data Gagal Disimpan', 'error');
+            return redirect()->back()->withInput()->with('error', 'Data Tidak Berhasil Diperbarui' . $e->getMessage());
+        }
+    }
+
     public function store(Request $request)
     {
         try {
@@ -178,7 +235,7 @@ class AttendanceController extends Controller
                                 'total_hour' => $course->total_hour,
                                 'latitude' => $latitude,
                                 'longitude' => $longitude,
-                                'status' => Attendance::STATUS_NOT_CONFIRMED
+                                'status' => Attendance::STATUS_NOT_CONFIRMED_PRESENT
                             ]);
                         } else {
                             // If Data Error
@@ -212,7 +269,7 @@ class AttendanceController extends Controller
                     'schedule_course_name' => $request->schedule_course_name,
                     'schedule_lecturer_name' => $request->schedule_lecturer_name,
                     'total_hour' => $course->total_hour,
-                    'status' => Attendance::STATUS_NOT_CONFIRMED
+                    'status' => Attendance::STATUS_CANT_PRESENT
                 ]);
             } else {
                 // Save File
@@ -229,7 +286,7 @@ class AttendanceController extends Controller
                     'schedule_course_name' => $request->schedule_course_name,
                     'schedule_lecturer_name' => $request->schedule_lecturer_name,
                     'total_hour' => $course->total_hour,
-                    'status' => Attendance::STATUS_NOT_CONFIRMED,
+                    'status' => Attendance::STATUS_NOT_CONFIRMED_PERMIT,
                     'file' => $fileName,
                     'reason' => $request->reason
                 ]);

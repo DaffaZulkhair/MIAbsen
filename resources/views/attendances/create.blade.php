@@ -38,10 +38,14 @@
                             </table>
                             <div class="col-md-12 text-center mt-4">
                                 @if ($attendance)
-                                    @if ($attendance->status == App\Models\Attendance::STATUS_NOT_CONFIRMED)
+                                    @if ($attendance->status == App\Models\Attendance::STATUS_NOT_CONFIRMED_PRESENT)
+                                        <span class="badge badge-warning">Menunggu Konfirmasi</span>
+                                    @elseif ($attendance->status == App\Models\Attendance::STATUS_NOT_CONFIRMED_PERMIT)
+                                        <span class="badge badge-warning">Menunggu Konfirmasi</span>
+                                    @elseif ($attendance->status == App\Models\Attendance::STATUS_CANT_PRESENT)
                                         <span class="badge badge-warning">Menunggu Konfirmasi</span>
                                     @else
-                                    <span class="badge badge-success">Sudah Melakukan Presensi</span>
+                                        <span class="badge badge-success">Sudah Melakukan Presensi</span>
                                     @endif
                                 @else
                                     <a href="{{ route('attendance.present', Crypt::encrypt($item->id)) }}"
