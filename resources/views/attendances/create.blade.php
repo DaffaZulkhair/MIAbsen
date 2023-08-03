@@ -39,10 +39,9 @@
                             <div class="col-md-12 text-center mt-4">
                                 @if ($attendance)
                                     @if ($attendance->status == App\Models\Attendance::STATUS_NOT_CONFIRMED)
-                                        <span class="badge badge-primary">Sudah Melakukan Presensi</span>
+                                        <span class="badge badge-warning">Menunggu Konfirmasi</span>
                                     @else
-                                        <a href="{{ route('attendance.present', Crypt::encrypt($item->id)) }}"
-                                            class="btn btn-primary btn-sm">Presensi Kehadiran</a>
+                                    <span class="badge badge-success">Sudah Melakukan Presensi</span>
                                     @endif
                                 @else
                                     <a href="{{ route('attendance.present', Crypt::encrypt($item->id)) }}"

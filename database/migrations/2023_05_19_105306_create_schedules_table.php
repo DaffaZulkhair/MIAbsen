@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('date')->comment('hari');
             $table->time('time_start')->comment('jam mulai');
             $table->time('time_end')->comment('jam selesai');
+            $table->text('subject')->nullable()->comment('pokok bahasan');
             $table->timestamps();
         });
     }

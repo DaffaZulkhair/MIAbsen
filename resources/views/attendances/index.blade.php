@@ -18,7 +18,13 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Kelola Kehadiran</h4>
+                                @role('Mahasiswa')
+                                    <h4 class="card-title">Data Kehadiran</h4>
+                                @endrole
+                                @hasanyrole('Admin|Dosen|Pimpinan')
+                                    <h4 class="card-title">Kelola Kehadiran</h4>
+                                @endhasanyrole
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -90,8 +96,8 @@
                         data: 'schedule_lecturer_name'
                     },
                     {
-                        name: 'schedule_course_name ',
-                        data: 'schedule_course_name '
+                        name: 'schedule_course_name',
+                        data: 'schedule_course_name'
                     },
                     {
                         name: 'status',

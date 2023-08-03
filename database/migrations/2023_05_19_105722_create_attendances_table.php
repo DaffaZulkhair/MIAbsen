@@ -18,7 +18,6 @@ return new class extends Migration
             $table->bigInteger('schedule_id')->comment('foreign key schedule');
             $table->string('schedule_course_name')->nullable()->comment('mata kuliah');
             $table->string('schedule_lecturer_name')->nullable()->comment('dosen');
-            $table->text('subject')->nullable()->comment('pokok bahasan');
             $table->integer('total_hour')->nullable()->comment('jumlah jam');
             $table->integer('score_hour')->nullable()->comment('nilai dari jumlah jam');
             $table->string('latitude')->nullable()->comment('latitude');

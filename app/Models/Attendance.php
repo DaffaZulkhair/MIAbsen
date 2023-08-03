@@ -17,10 +17,12 @@ class Attendance extends Model
     const STATUS_LATE = "Terlambat";
     const STATUS_SICK = "Sakit";
     const STATUS_PERMIT = "Izin";
+    const STATUS_CANT_PRESENT = "Tidak Bisa Presensi";
 
     const STATUS_CHOICE = [
         self::STATUS_PRESENT => self::STATUS_PRESENT,
         self::STATUS_SICK => self::STATUS_SICK,
         self::STATUS_PERMIT => self::STATUS_PERMIT,
+        self::STATUS_CANT_PRESENT => self::STATUS_CANT_PRESENT,
     ];
 }

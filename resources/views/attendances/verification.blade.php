@@ -29,7 +29,7 @@
                                             <th>No</th>
                                             <th>Aksi</th>
                                             <th>Nama</th>
-                                            <th>Dosen</th>
+                                            <th>Dosen Pengajar</th>
                                             <th>Mata Kuliah</th>
                                             <th>Status</th>
                                             <th>Tanggal</th>
@@ -90,8 +90,8 @@
                         data: 'schedule_lecturer_name'
                     },
                     {
-                        name: 'schedule_course_name ',
-                        data: 'schedule_course_name '
+                        name: 'schedule_course_name',
+                        data: 'schedule_course_name'
                     },
                     {
                         name: 'status',
