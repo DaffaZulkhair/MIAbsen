@@ -72,6 +72,7 @@ Route::group(['controller' => AttendanceController::class, 'prefix' => 'attendan
     Route::get('/show/{id}', 'show')->name('show');
     Route::get('/datatable', 'datatable')->name('datatable');
     Route::get('/datatable_verification', 'datatable_verification')->name('datatable_verification');
+    Route::get('/datatable_report', 'datatable_report')->name('datatable_report');
     Route::post('/store', 'store')->name('store');
     Route::put('/update_verification/{id}', 'update_verification')->name('update_verification');
     Route::delete('/destroy/{id}', 'destroy')->name('destroy');

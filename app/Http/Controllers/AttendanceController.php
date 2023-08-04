@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
-use Attribute;
 
 class AttendanceController extends Controller
 {
@@ -46,6 +45,23 @@ class AttendanceController extends Controller
         $data = Attendance::find($id);
 
         return view('attendances.show', compact('data'));
+    }
+
+    public function report()
+    {
+        return view('attendances.report');
+    }
+
+    public function datatable_report()
+    {
+        $model = Attendance::query();
+
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->toJson();
     }
 
     public function datatable()
