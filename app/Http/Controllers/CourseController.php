@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 
 class CourseController extends Controller
@@ -35,8 +36,11 @@ class CourseController extends Controller
 
                 $btn = "<div class='btn-group'>";
 
-                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
-                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                if (Auth::user()->hasRole('Admin')) {
+                    $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                    $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                }
+
                 $btn .= "</div>";
 
                 return $btn;

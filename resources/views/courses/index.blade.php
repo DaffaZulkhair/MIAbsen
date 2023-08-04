@@ -15,8 +15,11 @@
                             <div class="header-title">
                                 <h4 class="card-title">Kelola Mata Kuliah</h4>
                             </div>
-                            <a class="btn btn-sm btn-outline-info" href="{{ route('course.create') }}"><i
-                                    class="fa fa-plus"></i> Tambah Data</a>
+                            @role('Admin')
+                                <a class="btn btn-sm btn-outline-info" href="{{ route('course.create') }}"><i
+                                        class="fa fa-plus"></i> Tambah Data</a>
+                            @endrole
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

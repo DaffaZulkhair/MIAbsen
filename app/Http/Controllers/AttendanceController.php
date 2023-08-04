@@ -40,6 +40,14 @@ class AttendanceController extends Controller
         return view('attendances.show_verification', compact('data'));
     }
 
+    public function show($id)
+    {
+        $id = Crypt::decrypt($id);
+        $data = Attendance::find($id);
+
+        return view('attendances.show', compact('data'));
+    }
+
     public function datatable()
     {
         if (Auth::user()->hasRole('Mahasiswa')) {
@@ -58,15 +66,13 @@ class AttendanceController extends Controller
             })
             ->addColumn('action', function ($data) {
                 $url_show = route('attendance.show', Crypt::encrypt($data->id));
-                $url_edit = route('attendance.edit', Crypt::encrypt($data->id));
                 $url_delete = route('attendance.destroy', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
                 $btn .= "<a href='$url_show' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Detail</a>";
 
-                if (Auth::user()->hasRole('Mahasiswa')) {
+                if (Auth::user()->hasanyRole('Mahasiswa|Pimpinan')) {
                 } else {
-                    $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
                     $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
                 }
 
@@ -76,7 +82,6 @@ class AttendanceController extends Controller
             })
             ->toJson();
     }
-
 
     public function datatable_verification()
     {

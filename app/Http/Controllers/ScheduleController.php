@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -44,9 +45,13 @@ class ScheduleController extends Controller
                 $url_delete = route('schedule.destroy', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
+                if (Auth::user()->hasrole('Admin')) {
+                    $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                    $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                } elseif (Auth::user()->hasRole('Dosen')) {
+                    $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Detail</a>";
+                }
 
-                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
-                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
                 $btn .= "</div>";
 
                 return $btn;

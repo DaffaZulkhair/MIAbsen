@@ -15,8 +15,10 @@
                             <div class="header-title">
                                 <h4 class="card-title">Kelola Jadwal Kuliah</h4>
                             </div>
-                            <a class="btn btn-sm btn-outline-info" href="{{ route('schedule.create') }}"><i
-                                    class="fa fa-plus"></i> Tambah Data</a>
+                            @role('Admin')
+                                <a class="btn btn-sm btn-outline-info" href="{{ route('schedule.create') }}"><i
+                                        class="fa fa-plus"></i> Tambah Data</a>
+                            @endrole
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -28,6 +30,7 @@
                                             <th>Kelas</th>
                                             <th>Dosen</th>
                                             <th>Mata Kuliah</th>
+                                            <th>Pokok Bahasan</th>
                                             <th>Tanggal</th>
                                             <th>Jam Mulai</th>
                                             <th>Jam Selesai</th>
@@ -78,13 +81,18 @@
                         name: 'class',
                         data: 'class'
                     },
+
+                    {
+                        name: 'lecturer_name',
+                        data: 'lecturer_name'
+                    },
                     {
                         name: 'course_name',
                         data: 'course_name'
                     },
                     {
-                        name: 'lecturer_name',
-                        data: 'lecturer_name'
+                        name: 'subject',
+                        data: 'subject'
                     },
                     {
                         name: 'date',

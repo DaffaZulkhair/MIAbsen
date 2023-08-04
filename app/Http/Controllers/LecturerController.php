@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LecturerController extends Controller
 {
@@ -30,11 +31,15 @@ class LecturerController extends Controller
         return DataTables::of($model)
             ->addColumn('action', function ($data) {
 
+
                 $url_edit = route('lecturer.edit', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
 
-                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                if (Auth::user()->hasRole('Admin')) {
+                    $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                }
+
                 $btn .= "</div>";
 
                 return $btn;

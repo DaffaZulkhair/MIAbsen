@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body">
                     @if (session('error'))
-                        <span class="text-danger">{{ $message }}</span>
+                        <span class="text-danger">{{ session('error') }}</span>
                     @endif
                     <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf

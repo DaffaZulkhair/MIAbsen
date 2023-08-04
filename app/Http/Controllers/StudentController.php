@@ -141,6 +141,7 @@ class StudentController extends Controller
             $input = $request->all();
 
             // Update Data
+            $input['class'] = $request->semester . " " . $request->class;
             $student->update($input);
 
             // Save Data

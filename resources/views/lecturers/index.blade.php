@@ -15,10 +15,10 @@
                             <div class="header-title">
                                 <h4 class="card-title">Kelola Dosen</h4>
                             </div>
-                            {{-- @role('Admin') --}}
-                            <a class="btn btn-sm btn-outline-info" href="{{ route('lecturer.create') }}"><i
-                                    class="fa fa-plus"></i> Tambah Data</a>
-                            {{-- @role --}}
+                            @role('Admin')
+                                <a class="btn btn-sm btn-outline-info" href="{{ route('lecturer.create') }}"><i
+                                        class="fa fa-plus"></i> Tambah Data</a>
+                            @endrole
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

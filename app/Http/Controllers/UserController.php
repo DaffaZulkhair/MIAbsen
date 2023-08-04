@@ -156,8 +156,6 @@ class UserController extends Controller
                 'name' => 'required',
                 'username' => 'required',
                 'email' => 'required|email',
-                'password' => 'required|same:confirm-password',
-                'roles' => 'required',
             ]);
 
             // Update Data

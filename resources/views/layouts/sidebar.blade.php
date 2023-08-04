@@ -14,7 +14,7 @@
     <div class="data-scrollbar" data-scroll="1">
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="side-menu">
-                @hasanyrole('Admin|Pimpinan')
+                @role('Admin')
                     <li class="sidebar-layout">
                         <a href="{{ route('home') }}" class="svg-icon">
                             <i class="">
@@ -99,7 +99,7 @@
                         </ul>
                     </li>
 
-                    <li class=" sidebar-layout">
+                    <li class="sidebar-layout">
                         <a href="#app2" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
                             <i>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -169,7 +169,7 @@
                     <li class="px-3 pt-3 pb-2">
                         <span class="text-uppercase small font-weight-bold">Verifikasi</span>
                     </li>
-                    <li class=" sidebar-layout">
+                    <li class="sidebar-layout">
                         <a href="{{ route('attendance.verification') }}" class="svg-icon">
                             <i class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -195,7 +195,7 @@
                             </i><span class="ml-2">Laporan Presensi</span>
                         </a>
                     </li>
-                @endhasanyrole
+                @endrole
 
                 @role('Dosen')
                     <li class="sidebar-layout">
@@ -355,6 +355,42 @@
                                     </i><span class="">Riwayat Presensi</span>
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                @endrole
+
+                @role('Pimpinan')
+                    <li class="sidebar-layout">
+                        <a href="#app2" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                                </svg>
+
+                            </i>
+                            <span class="ml-2">Kelola Pembelajaran</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon iq-arrow-right arrow-active"
+                                width="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <ul id="app2" class="submenu collapse" data-parent="#iq-sidebar-toggle">
+                            <li class=" sidebar-layout">
+                                <a href="{{ route('attendance.index') }}" class="svg-icon">
+                                    <i class="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
+                                        </svg>
+
+                                    </i><span class="">Presensi</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
                 @endrole
