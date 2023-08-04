@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Nama : </label>
+                                    <label for="name">Nama Mata Kuliah: </label>
                                     <input type="text" class="form-control" id="name" name="name"
                                         value="{{ old('name') }}" required>
                                     @error('name')

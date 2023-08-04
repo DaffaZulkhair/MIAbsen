@@ -134,7 +134,8 @@
                                 <div class="form-group">
                                     <label for="parent_phone_number">No. Handphone Orang Tua : </label>
                                     <input type="number" class="form-control" id="parent_phone_number"
-                                        name="parent_phone_number" value="{{ old('parent_phone_number', $data->parent_phone_number) }}" required>
+                                        name="parent_phone_number"
+                                        value="{{ old('parent_phone_number', $data->parent_phone_number) }}" required>
                                     @error('parent_phone_number')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -152,7 +153,9 @@
                                     <select class="form-control" name="religion" id="religion" required>
                                         <option selected>Pilih Agama</option>
                                         @foreach (App\Models\Student::AGAMA_CHOICE as $key => $value)
-                                            <option value="{{ $key }}" {{ $key == $data->religion ? 'selected' : '' }}>{{ $value }}</option>
+                                            <option value="{{ $key }}"
+                                                {{ $key == $data->religion ? 'selected' : '' }}>{{ $value }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

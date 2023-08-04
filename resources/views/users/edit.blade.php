@@ -49,12 +49,12 @@
                 <div class="form-group">
                     <label for="password">Password </label>
                     <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}"
-                        placeholder="Password..." required>
+                        placeholder="Password...">
                 </div>
                 <div class="form-group">
                     <label for="confirm-password">Konfirmasi Password </label>
                     <input type="password" name="confirm-password" class="form-control" id="confirm-password"
-                        value="{{ old('confirm-password') }}" placeholder="Konfirmasi Password..." required>
+                        value="{{ old('confirm-password') }}" placeholder="Konfirmasi Password...">
                 </div>
                 <div class="form-group">
                     <label for="file">Masukkan Foto</label>

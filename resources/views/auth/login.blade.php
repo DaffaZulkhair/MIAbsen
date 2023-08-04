@@ -40,10 +40,6 @@
                                             Masukkan Akun Anda</span></p>
                                 </div>
 
-                                @if (session('error'))
-                                    <p>{{ session('error') }}</p>
-                                @endif
-
                                 <form action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="row">
@@ -55,7 +51,7 @@
                                                     value="{{ old('username') }}">
                                                 @error('username')
                                                     <span class="text-danger">
-                                                        {{ $message }}
+                                                        Masukkan username anda!
                                                     </span>
                                                 @enderror
                                             </div>
@@ -70,7 +66,7 @@
                                                     value="{{ old('password') }}">
                                                 @error('password')
                                                     <span class="text-danger">
-                                                        {{ $message }}
+                                                        Password anda salah!
                                                     </span>
                                                 @enderror
                                             </div>
