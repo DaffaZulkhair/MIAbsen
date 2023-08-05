@@ -61,6 +61,14 @@ class AttendanceController extends Controller
                 $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
                 return $formatedDate;
             })
+
+            ->editColumn('student_nim', function ($data) {
+                return $data->student->nim;
+            })
+
+            ->editColumn('student_class', function ($data) {
+                return $data->student->class;
+            })
             ->toJson();
     }
 

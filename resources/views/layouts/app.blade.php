@@ -9,7 +9,7 @@
     <!-- FontAwesome JS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('DATUM/assets/images/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('DATUM/assets/images/mi.png') }}" />
 
     <link rel="stylesheet" href="{{ asset('DATUM/assets/css/backend-plugin.min.css') }}">
     <link rel="stylesheet" href="{{ asset('DATUM/assets/css/backend.css?v=1.0.0') }}">

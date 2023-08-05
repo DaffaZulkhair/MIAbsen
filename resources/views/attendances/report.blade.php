@@ -22,6 +22,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Kelas</th>
+                                            <th>NIM</th>
                                             <th>Nama Mahasiswa</th>
                                             <th>Dosen Pengajar</th>
                                             <th>Mata Kuliah</th>
@@ -61,21 +63,8 @@
                 destroy: true,
                 dom: 'Blfrtip',
                 buttons: [{
-                        extend: 'pdf',
-                        // exportOptions: {
-                        //     columns: [0, 1, 2, 3, 4, 5, 6] // Column index which needs to export
-                        // }
-                    },
-                    {
-                        extend: 'csv',
-                        // exportOptions: {
-                        //     columns: [0, 6] // Column index which needs to export
-                        // }
-                    },
-                    {
-                        extend: 'excel',
-                    },
-                ],
+                    extend: 'excel',
+                }, ],
                 columns: [{
                         "data": null,
                         "sortable": false,
@@ -83,6 +72,14 @@
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
+                    },
+                    {
+                        name: 'student_class',
+                        data: 'student_class'
+                    },
+                    {
+                        name: 'student_nim',
+                        data: 'student_nim'
                     },
                     {
                         name: 'student_name',
