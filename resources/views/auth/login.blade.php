@@ -44,7 +44,7 @@
                                                     value="{{ old('username') }}">
                                                 @error('username')
                                                     <span class="text-danger">
-                                                        Masukkan username anda!
+                                                        Username tidak valid!
                                                     </span>
                                                 @enderror
                                             </div>
@@ -57,7 +57,7 @@
                                                 <input class="form-control" type="password"
                                                     placeholder="Masukkan Password" name="password"
                                                     value="{{ old('password') }}">
-                                                @error('password')
+                                                @error('username')
                                                     <span class="text-danger">
                                                         Password anda salah!
                                                     </span>

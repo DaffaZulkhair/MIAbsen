@@ -27,7 +27,14 @@ class ScheduleController extends Controller
 
     public function datatable()
     {
-        $model = Schedule::query();
+        if (Auth::user()->hasRole('Dosen')) {
+            $id = Auth::user()->id;
+            $lecturer = Lecturer::where('user_id', $id)->first();
+            $model = Schedule::where('lecturer_id', $lecturer->id)
+                ->orderBy('id', 'desc');
+        } else {
+            $model = Schedule::query();
+        }
 
         return DataTables::of($model)
             ->editColumn('date', function ($data) {

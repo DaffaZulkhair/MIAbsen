@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Course;
+use App\Models\Lecturer;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use Yajra\DataTables\DataTables;
@@ -79,6 +80,10 @@ class AttendanceController extends Controller
             $student = Student::where('user_id', $user_id)->first();
 
             $model = Attendance::where('student_id', $student->id)->orderBy('id', 'desc');
+        } elseif (Auth::user()->hasRole('Dosen')) {
+            $id = Auth::user()->id;
+            $lecturer = Lecturer::where('user_id', $id)->first();
+            $model = Attendance::where('schedule_lecturer_name', $lecturer->name)->orderBy('id', 'desc');
         } else {
             $model = Attendance::query();
         }
@@ -133,6 +138,7 @@ class AttendanceController extends Controller
     public function create()
     {
         $today = Carbon::today()->format('Y-m-d');
+        $time_today = Carbon::now()->format('H:i:s');
 
         $user_id = Auth::user()->id;
         $student = Student::where('user_id', $user_id)->first();
@@ -142,7 +148,7 @@ class AttendanceController extends Controller
             ->get();
 
         $attendance = Attendance::where('student_id', $student->id)
-            ->whereDate('created_at', $today)
+            ->whereDate('created_at', $today)   
             ->first();
 
         foreach ($schedules as $item) {
