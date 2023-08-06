@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Manajemen User</h4>
+                                <h4 class="card-title">Manajemen Pengguna</h4>
                             </div>
                             <a class="text-end btn btn-sm btn-outline-info" href="{{ route('user.create') }}"><i
                                     class="fa fa-plus"></i> Tambah Data</a>
