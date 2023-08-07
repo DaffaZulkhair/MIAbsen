@@ -61,7 +61,7 @@
                                         aria-expanded="false">
                                         <span class="mb-0 ml-2 user-name">{{ Auth::user()->name }}</span>
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    {{-- <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <li class="dropdown-item  d-flex svg-icon">
                                             <svg class="svg-icon mr-0 text-secondary" id="h-05-p" width="20"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -77,7 +77,7 @@
                                                 @csrf
                                             </form>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                             </ul>
                         </div>
