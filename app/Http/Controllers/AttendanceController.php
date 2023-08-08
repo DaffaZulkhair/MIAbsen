@@ -260,30 +260,50 @@ class AttendanceController extends Controller
             $user_id = Auth::user()->id;
             $student = Student::where('user_id', $user_id)->first();
 
-            if ($request->type == Attendance::STATUS_PRESENT) {
-                if ($date == $today) {
-                    if ($time_today >= $time_start || $time_today <= $time_end) {
-                        $jarak = $this->haversine($latitude, $longitude, $latitude_mi, $longitude_mi);
-                        $jarakThreshold = 2000;
-                        if ($jarak <= $jarakThreshold) {
-                            Attendance::create([
-                                'student_id' => $student->id,
-                                'student_name' => $student->name,
-                                'student_class' => $student->class,
-                                'schedule_id' => $schedule_id,
-                                'schedule_course_name' => $request->schedule_course_name,
-                                'schedule_lecturer_name' => $request->schedule_lecturer_name,
-                                'total_hour' => $course->total_hour,
-                                'latitude' => $latitude,
-                                'longitude' => $longitude,
-                                'status' => Attendance::STATUS_NOT_CONFIRMED_PRESENT
-                            ]);
+            $checkAttendance = Attendance::where('schedule_id', $schedule_id)
+                ->where('created_at', Carbon::now())
+                ->first();
+
+            if ($checkAttendance) {
+                // If Data Error
+                DB::rollBack();
+
+                // Alert & Redirect
+                Alert::toast('Anda Sudah Melakukan Presensi', 'error');
+                return redirect()->back();
+            } else {
+                if ($request->type == Attendance::STATUS_PRESENT) {
+                    if ($date == $today) {
+                        if ($time_today >= $time_start || $time_today <= $time_end) {
+                            $jarak = $this->haversine($latitude, $longitude, $latitude_mi, $longitude_mi);
+                            $jarakThreshold = 2000;
+                            if ($jarak <= $jarakThreshold) {
+                                Attendance::create([
+                                    'student_id' => $student->id,
+                                    'student_name' => $student->name,
+                                    'student_class' => $student->class,
+                                    'schedule_id' => $schedule_id,
+                                    'schedule_course_name' => $request->schedule_course_name,
+                                    'schedule_lecturer_name' => $request->schedule_lecturer_name,
+                                    'total_hour' => $course->total_hour,
+                                    'latitude' => $latitude,
+                                    'longitude' => $longitude,
+                                    'status' => Attendance::STATUS_NOT_CONFIRMED_PRESENT
+                                ]);
+                            } else {
+                                // If Data Error
+                                DB::rollBack();
+
+                                // Alert & Redirect
+                                Alert::toast('Anda harus berada dalam radius 5 meter dari lokasi absen.', 'error');
+                                return redirect()->back();
+                            }
                         } else {
                             // If Data Error
                             DB::rollBack();
 
                             // Alert & Redirect
-                            Alert::toast('Anda harus berada dalam radius 5 meter dari lokasi absen.', 'error');
+                            Alert::toast('Tidak Dapat Melakukan Presensi', 'error');
                             return redirect()->back();
                         }
                     } else {
@@ -294,45 +314,38 @@ class AttendanceController extends Controller
                         Alert::toast('Tidak Dapat Melakukan Presensi', 'error');
                         return redirect()->back();
                     }
+                } elseif ($request->type == Attendance::STATUS_CANT_PRESENT) {
+                    Attendance::create([
+                        'student_id' => $student->id,
+                        'student_name' => $student->name,
+                        'student_class' => $student->class,
+                        'schedule_id' => $schedule_id,
+                        'schedule_course_name' => $request->schedule_course_name,
+                        'schedule_lecturer_name' => $request->schedule_lecturer_name,
+                        'total_hour' => $course->total_hour,
+                        'status' => Attendance::STATUS_CANT_PRESENT
+                    ]);
                 } else {
-                    // If Data Error
-                    DB::rollBack();
+                    // Save File
+                    if ($file = $request->file('file')) {
+                        $destinationPath = 'assets/files/';
+                        $fileName = "SURAT" . "_" . $student->nim . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                        $file->move($destinationPath, $fileName);
+                    }
 
-                    // Alert & Redirect
-                    Alert::toast('Tidak Dapat Melakukan Presensi', 'error');
-                    return redirect()->back();
+                    Attendance::create([
+                        'student_id' => $student->id,
+                        'student_name' => $student->name,
+                        'student_class' => $student->class,
+                        'schedule_id' => $schedule_id,
+                        'schedule_course_name' => $request->schedule_course_name,
+                        'schedule_lecturer_name' => $request->schedule_lecturer_name,
+                        'total_hour' => $course->total_hour,
+                        'status' => Attendance::STATUS_NOT_CONFIRMED_PERMIT,
+                        'file' => $fileName,
+                        'reason' => $request->reason
+                    ]);
                 }
-            } elseif ($request->type == Attendance::STATUS_CANT_PRESENT) {
-                Attendance::create([
-                    'student_id' => $student->id,
-                    'student_name' => $student->name,
-                    'student_class' => $student->class,
-                    'schedule_id' => $schedule_id,
-                    'schedule_course_name' => $request->schedule_course_name,
-                    'schedule_lecturer_name' => $request->schedule_lecturer_name,
-                    'total_hour' => $course->total_hour,
-                    'status' => Attendance::STATUS_CANT_PRESENT
-                ]);
-            } else {
-                // Save File
-                if ($file = $request->file('file')) {
-                    $destinationPath = 'assets/files/';
-                    $fileName = "SURAT" . "_" . $student->nim . date('YmdHis') . "." . $file->getClientOriginalExtension();
-                    $file->move($destinationPath, $fileName);
-                }
-
-                Attendance::create([
-                    'student_id' => $student->id,
-                    'student_name' => $student->name,
-                    'student_class' => $student->class,
-                    'schedule_id' => $schedule_id,
-                    'schedule_course_name' => $request->schedule_course_name,
-                    'schedule_lecturer_name' => $request->schedule_lecturer_name,
-                    'total_hour' => $course->total_hour,
-                    'status' => Attendance::STATUS_NOT_CONFIRMED_PERMIT,
-                    'file' => $fileName,
-                    'reason' => $request->reason
-                ]);
             }
 
             // Save Data

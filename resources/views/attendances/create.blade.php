@@ -41,7 +41,7 @@
                                     <a href="{{ route('attendance.present', Crypt::encrypt($item->id)) }}"
                                         class="btn btn-primary btn-sm">Presensi Kehadiran</a>
                                 @else
-                                    <span class="badge badge-success">Sudah Melakukan Presensi</span>
+                                    <span class="badge badge-success">Presensi Sudah Ditutup</span>
                                 @endif
                             </div>
                         </div>
