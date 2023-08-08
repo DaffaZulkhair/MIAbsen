@@ -93,7 +93,8 @@
 
                             </div>
                             <div class="col-md-12 text-center mt-3">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button onclick="return confirm('Submit Data?')" type="submit"
+                                    class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
                     </form>

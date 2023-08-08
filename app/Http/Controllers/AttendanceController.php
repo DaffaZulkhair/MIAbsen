@@ -73,7 +73,7 @@ class AttendanceController extends Controller
             ->toJson();
     }
 
-    public function datatable()
+    public function datatable(Request $request)
     {
         if (Auth::user()->hasRole('Mahasiswa')) {
             $user_id = Auth::user()->id;
@@ -85,7 +85,17 @@ class AttendanceController extends Controller
             $lecturer = Lecturer::where('user_id', $id)->first();
             $model = Attendance::where('schedule_lecturer_name', $lecturer->name)->orderBy('id', 'desc');
         } else {
-            $model = Attendance::query();
+            $searchClass = $request->get('class');
+            $searchSemester = $request->get('semester');
+            $searchClassSemester = $searchSemester . " " . $searchClass;
+
+            $model = Attendance::query()
+                ->when(!empty($searchSemester), function ($query) use ($searchClassSemester) {
+                    $query->where('student_class', $searchClassSemester);
+                })
+                ->when(!empty($searchClass), function ($query) use ($searchClassSemester) {
+                    $query->where('student_class', $searchClassSemester);
+                });
         }
 
         return DataTables::of($model)
@@ -148,14 +158,9 @@ class AttendanceController extends Controller
             ->get();
 
         $attendance = Attendance::where('student_id', $student->id)
-            ->whereDate('created_at', $today)   
+            ->whereDate('created_at', $today)
+            ->whereNull('status')`
             ->first();
-
-        foreach ($schedules as $item) {
-            $item->date = Carbon::parse($item->date)->isoFormat('d MMMM Y');
-            $item->time_start = Carbon::parse($item->time_start)->translatedFormat('H:i');
-            $item->time_end = Carbon::parse($item->time_end)->translatedFormat('H:i');
-        }
 
         return view('attendances.create', compact('schedules', 'attendance'));
     }
@@ -259,11 +264,12 @@ class AttendanceController extends Controller
                 if ($date == $today) {
                     if ($time_today >= $time_start || $time_today <= $time_end) {
                         $jarak = $this->haversine($latitude, $longitude, $latitude_mi, $longitude_mi);
-                        $jarakThreshold = 5;
+                        $jarakThreshold = 2000;
                         if ($jarak <= $jarakThreshold) {
                             Attendance::create([
                                 'student_id' => $student->id,
                                 'student_name' => $student->name,
+                                'student_class' => $student->class,
                                 'schedule_id' => $schedule_id,
                                 'schedule_course_name' => $request->schedule_course_name,
                                 'schedule_lecturer_name' => $request->schedule_lecturer_name,
@@ -300,6 +306,7 @@ class AttendanceController extends Controller
                 Attendance::create([
                     'student_id' => $student->id,
                     'student_name' => $student->name,
+                    'student_class' => $student->class,
                     'schedule_id' => $schedule_id,
                     'schedule_course_name' => $request->schedule_course_name,
                     'schedule_lecturer_name' => $request->schedule_lecturer_name,
@@ -317,6 +324,7 @@ class AttendanceController extends Controller
                 Attendance::create([
                     'student_id' => $student->id,
                     'student_name' => $student->name,
+                    'student_class' => $student->class,
                     'schedule_id' => $schedule_id,
                     'schedule_course_name' => $request->schedule_course_name,
                     'schedule_lecturer_name' => $request->schedule_lecturer_name,

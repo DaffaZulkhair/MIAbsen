@@ -44,15 +44,6 @@
                         </svg>
                     </div>
                     <div class="d-flex align-items-center">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-label="Toggle navigation">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary" width="30" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16m-7 6h7" />
-                            </svg>
-                        </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto navbar-list align-items-center">
                                 <li class="nav-item nav-icon dropdown">

@@ -52,7 +52,6 @@
     <script>
         $(document).ready(function() {
             getDatatable();
-
         });
 
         let data_table = "";
@@ -60,7 +59,7 @@
         function getDatatable() {
             data_table = $("#data-table").DataTable({
                 ajax: {
-                    url: "{{ route('schedule.datatable') }}"
+                    url: "{{ route('schedule.datatable') }}",
                 },
                 serverSide: true,
                 processing: true,
@@ -109,6 +108,16 @@
 
                 ],
             });
+        }
+
+        function filter() {
+            $("#filter_semester").change(() => {
+                getDatatable();
+            })
+
+            $("#filter_class").change(() => {
+                getDatatable();
+            })
         }
     </script>
 @endsection
