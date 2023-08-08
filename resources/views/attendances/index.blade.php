@@ -24,7 +24,26 @@
                                 @hasanyrole('Admin|Dosen|Pimpinan')
                                     <h4 class="card-title">Kelola Kehadiran</h4>
                                 @endhasanyrole
-
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Filter Kelas</h6>
+                                <select class="form-control select2" id="filter_class">
+                                    <option value="">Semua Kelas</option>
+                                    @foreach (App\Models\Student::CLASS_CHOICE as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Filter Semester</h6>
+                                <select class="form-control select2" id="filter_semester">
+                                    <option value="">Semua Semester</option>
+                                    @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="card-body">
@@ -35,6 +54,7 @@
                                             <th>No</th>
                                             <th>Aksi</th>
                                             <th>Nama</th>
+                                            <th>Kelas</th>
                                             <th>Dosen</th>
                                             <th>Mata Kuliah</th>
                                             <th>Status</th>
@@ -60,6 +80,11 @@
     <script>
         $(document).ready(function() {
             getDatatable();
+            filter();
+            $(".select2").select2({
+                width: '100%',
+                theme: 'classic'
+            });
         });
 
         let data_table = "";
@@ -67,7 +92,11 @@
         function getDatatable() {
             data_table = $("#data-table").DataTable({
                 ajax: {
-                    url: "{{ route('attendance.datatable') }}"
+                    url: "{{ route('attendance.datatable') }}",
+                    data: {
+                        class: $("#filter_class").val(),
+                        semester: $("#filter_semester").val(),
+                    }
                 },
                 serverSide: true,
                 processing: true,
@@ -92,6 +121,10 @@
                         data: 'student_name'
                     },
                     {
+                        name: 'student_class',
+                        data: 'student_class'
+                    },
+                    {
                         name: 'schedule_lecturer_name',
                         data: 'schedule_lecturer_name'
                     },
@@ -109,6 +142,16 @@
                     },
                 ],
             });
+        }
+
+        function filter() {
+            $("#filter_semester").change(() => {
+                getDatatable();
+            })
+
+            $("#filter_class").change(() => {
+                getDatatable();
+            })
         }
     </script>
 @endsection

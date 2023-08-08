@@ -23,17 +23,17 @@
                                 <tr>
                                     <th>Tanggal</th>
                                     <td>&ensp;:</td>
-                                    <td>&ensp;{{ $item->date }}</td>
+                                    <td>&ensp;{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jam Mulai</th>
                                     <td>&ensp;:</td>
-                                    <td>&ensp;{{ $item->time_start }}</td>
+                                    <td>&ensp;{{ \Carbon\Carbon::parse($item->time_start)->format('H:i') }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jam Selesai</th>
                                     <td>&ensp;:</td>
-                                    <td>&ensp;{{ $item->time_end }}</td>
+                                    <td>&ensp;{{ \Carbon\Carbon::parse($item->time_end)->format('H:i') }}</td>
                                 </tr>
                             </table>
                             <div class="col-md-12 text-center mt-4">

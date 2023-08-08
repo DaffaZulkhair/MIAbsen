@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('student_id')->comment('foreign key user');
             $table->string('student_name')->nullable()->comment('student_name');
+            $table->string('student_class')->nullable()->comment('student_class');
             $table->bigInteger('schedule_id')->comment('foreign key schedule');
             $table->string('schedule_course_name')->nullable()->comment('mata kuliah');
             $table->string('schedule_lecturer_name')->nullable()->comment('dosen');

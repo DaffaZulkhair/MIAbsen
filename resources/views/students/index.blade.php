@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h6 class="mb-2">Filter Semester</h6>
-                                <select class="form-control select2"  id="filter_semester">
+                                <select class="form-control select2" id="filter_semester">
                                     <option value="">Semua Semester</option>
                                     @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
                                         <option value="{{ $key }}">{{ $value }}</option>
