@@ -37,21 +37,12 @@
                                 </tr>
                             </table>
                             <div class="col-md-12 text-center mt-4">
-                                @if ($attendance)
-                                    @if ($attendance->status == App\Models\Attendance::STATUS_NOT_CONFIRMED_PRESENT)
-                                        <span class="badge badge-warning">Menunggu Konfirmasi</span>
-                                    @elseif ($attendance->status == App\Models\Attendance::STATUS_NOT_CONFIRMED_PERMIT)
-                                        <span class="badge badge-warning">Menunggu Konfirmasi</span>
-                                    @elseif ($attendance->status == App\Models\Attendance::STATUS_CANT_PRESENT)
-                                        <span class="badge badge-warning">Menunggu Konfirmasi</span>
-                                    @else
-                                        <span class="badge badge-success">Sudah Melakukan Presensi</span>
-                                    @endif
-                                @else
+                                @if ($item->time_start >= $time_today && $item->time_end <= $time_today)
                                     <a href="{{ route('attendance.present', Crypt::encrypt($item->id)) }}"
                                         class="btn btn-primary btn-sm">Presensi Kehadiran</a>
+                                @else
+                                    <span class="badge badge-success">Sudah Melakukan Presensi</span>
                                 @endif
-
                             </div>
                         </div>
                     </div>

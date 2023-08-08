@@ -157,12 +157,12 @@ class AttendanceController extends Controller
             ->where('class', $student->class)
             ->get();
 
-        $attendance = Attendance::where('student_id', $student->id)
-            ->whereDate('created_at', $today)
-            ->whereNull('status')`
-            ->first();
+        // $attendance = Attendance::where('student_id', $student->id)
+        //     ->whereDate('created_at', $today)
+        //     ->whereNull('status')
+        //     ->first();
 
-        return view('attendances.create', compact('schedules', 'attendance'));
+        return view('attendances.create', compact('schedules', 'time_today'));
     }
 
     public function present($id)
