@@ -37,11 +37,11 @@
                                 </tr>
                             </table>
                             <div class="col-md-12 text-center mt-4">
-                                @if ($item->time_start >= $time_today || $item->time_end <= $time_today)
+                                @if ($time_today >= $item->time_start && $time_today <= $item->time_end)
                                     <a href="{{ route('attendance.present', Crypt::encrypt($item->id)) }}"
                                         class="btn btn-primary btn-sm">Presensi Kehadiran</a>
                                 @else
-                                    <span class="badge badge-success">Sudah Melakukan Presensi</span>
+                                    <span class="badge badge-success">Presensi Sudah Ditutup</span>
                                 @endif
                             </div>
                         </div>
