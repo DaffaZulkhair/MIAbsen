@@ -26,26 +26,28 @@
                                 @endhasanyrole
                             </div>
                         </div>
-                        <div class="row m-2">
-                            <div class="col-md-6">
-                                <h6 class="mb-2">Filter Kelas</h6>
-                                <select class="form-control select2" id="filter_class">
-                                    <option value="">Semua Kelas</option>
-                                    @foreach (App\Models\Student::CLASS_CHOICE as $key => $value)
-                                        <option value="{{ $key }}">{{ $value }}</option>
-                                    @endforeach
-                                </select>
+                        @hasanyrole('Admin|Dosen|Pimpinan')
+                            <div class="row m-2">
+                                <div class="col-md-6">
+                                    <h6 class="mb-2">Filter Kelas</h6>
+                                    <select class="form-control select2" id="filter_class">
+                                        <option value="">Semua Kelas</option>
+                                        @foreach (App\Models\Student::CLASS_CHOICE as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-2">Filter Semester</h6>
+                                    <select class="form-control select2" id="filter_semester">
+                                        <option value="">Semua Semester</option>
+                                        @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <h6 class="mb-2">Filter Semester</h6>
-                                <select class="form-control select2" id="filter_semester">
-                                    <option value="">Semua Semester</option>
-                                    @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
-                                        <option value="{{ $key }}">{{ $value }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                        @endhasanyrole
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="data-table" class="table table-striped table-bordered" width="100%">
