@@ -19,12 +19,12 @@
 
                                     <h5 class="mb-0 font-weight-bold">{{ $totalStudent }}</h5>
 
-
                                 </div>
 
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-body">
@@ -33,7 +33,6 @@
                                     <p class="mb-2 text-secondary">Dosen</p>
 
                                     <h5 class="mb-0 font-weight-bold">{{ $totalLecturer }}</h5>
-
 
                                 </div>
 
@@ -48,7 +47,6 @@
                                     <p class="mb-2 text-secondary">Kehadiran</p>
 
                                     <h5 class="mb-0 font-weight-bold">{{ $totalAttendance }}</h5>
-
 
                                 </div>
 
@@ -116,13 +114,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
                                         <label>Tanggal Lahir</label>
-                                        <input type="text" class="form-control" value="{{ $student['birth_date'] }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $student['birth_date'] }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
                                         <label>Tempat Lahir</label>
-                                        <input type="text" class="form-control" value="{{ $student['birth_place'] }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $student['birth_place'] }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -135,14 +135,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
                                         <label>Nomor Handphone</label>
-                                        <input type="text" class="form-control" value="{{ $student['phone_number'] }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $student['phone_number'] }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
                                         <label>Nomor Handphone Orangtua</label>
-                                        <input type="text" class="form-control" value="{{ $student['parent_phone_number'] }}"
-                                            readonly>
+                                        <input type="text" class="form-control"
+                                            value="{{ $student['parent_phone_number'] }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
