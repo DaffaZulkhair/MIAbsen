@@ -81,9 +81,20 @@ class AttendanceController extends Controller
 
             $model = Attendance::where('student_id', $student->id)->orderBy('id', 'desc');
         } elseif (Auth::user()->hasRole('Dosen')) {
+            $searchClass = $request->get('class');
+            $searchSemester = $request->get('semester');
+            $searchClassSemester = $searchSemester . " " . $searchClass;
+
             $id = Auth::user()->id;
             $lecturer = Lecturer::where('user_id', $id)->first();
-            $model = Attendance::where('schedule_lecturer_name', $lecturer->name)->orderBy('id', 'desc');
+            $model = Attendance::where('schedule_lecturer_name', $lecturer->name)
+                ->when(!empty($searchSemester), function ($query) use ($searchClassSemester) {
+                    $query->where('student_class', $searchClassSemester);
+                })
+                ->when(!empty($searchClass), function ($query) use ($searchClassSemester) {
+                    $query->where('student_class', $searchClassSemester);
+                })
+                ->orderBy('id', 'desc');
         } else {
             $searchClass = $request->get('class');
             $searchSemester = $request->get('semester');
