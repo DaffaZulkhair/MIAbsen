@@ -49,8 +49,8 @@
                 <div class="d-inline-flex align-items-center" style="height: 45px">
                     <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>Jl. Sungai Sahang No.3654,
                         Lorok Pakjo, Kec. Ilir Bar. I, Kota Palembang, Sumatera Selatan 30151</small>
-                    <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</small>
-                    <small class="text-light"><i class="fa fa-envelope-open me-2"></i>info@example.com</small>
+                    <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>+62 896-0314-1526</small>
+                    <small class="text-light"><i class="fa fa-envelope-open me-2"></i>mipolsri@gmail.com</small>
                 </div>
             </div>
             <div class="col-lg-4 text-center text-lg-end">
@@ -88,7 +88,7 @@
                 <div class="navbar-nav ms-auto py-0">
                     <a href="index.html" class="nav-item nav-link active">Beranda</a>
                     <a href="#about" class="nav-item nav-link">Tentang</a>
-                    <a href="contact.html" class="nav-item nav-link">Kontak</a>
+                    <a href="#about" class="nav-item nav-link">Kontak</a>
                 </div>
                 <a href="{{ route('login') }}" class="btn btn-primary py-2 px-4 ms-3">Masuk</a>
             </div>
@@ -177,8 +177,8 @@
                             <i class="fa fa-award text-primary"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-white mb-0">Data Tersimpan</h5>
-                            <h1 class="text-white mb-0" data-toggle="counter-up">250</h1>
+                            <h5 class="text-white mb-0">Jumlah Dosen</h5>
+                            <h1 class="text-white mb-0" data-toggle="counter-up">50</h1>
                         </div>
                     </div>
                 </div>
@@ -195,12 +195,12 @@
                     <div class="section-title position-relative pb-3 mb-5">
                         <h5 class="fw-bold text-primary text-uppercase">Tentang</h5>
                         <h1 class="mb-0">
-                            Pendataan Absensi Mahasiswa Manajemen Informatika Polsri
+                            Pendataan Presensi Mahasiswa Manajemen Informatika Polsri
                         </h1>
                     </div>
                     <p class="mb-4">
-                        MIabsen Berfungsi sebagai pendataan kontrol kegiatan belajar mengajar mahasiswa di setiap hari
-                        perkuliahan
+                        MIabsen Berfungsi sebagai tempat presensi mahasiswa serta pengelolaan kehadiran belajar mengajar
+                        di jurusan Manajemen Informatika
                     </p>
                     <div class="row g-0 mb-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
@@ -227,10 +227,10 @@
                         </div>
                         <div class="ps-4">
                             <h5 class="mb-2">Bila terdapat kendala hubungi admin</h5>
-                            <h4 class="text-primary mb-0">+012 345 6789</h4>
+                            <h4 class="text-primary mb-0">+62 896-0314-1526</h4>
                         </div>
                     </div>
-                    <a href="quote.html" class="btn btn-primary py-3 px-5 mt-3 wow zoomIn"
+                    <a href="http://wa.me/6289603141526" class="btn btn-primary py-3 px-5 mt-3 wow zoomIn"
                         data-wow-delay="0.9s">Hubungi</a>
                 </div>
                 <div class="col-lg-5" style="min-height: 350px">
@@ -327,8 +327,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ asset('design/img/team-1.jpg') }}"
-                                alt="" />
+                            <img class="img-fluid w-100" src="{{ asset('design/img/mi.png') }}" alt="" />
                             <div class="team-social">
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
                                         class="fab fa-twitter fw-normal"></i></a>
@@ -336,8 +335,7 @@
                                         class="fab fa-facebook-f fw-normal"></i></a>
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
                                         class="fab fa-instagram fw-normal"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
-                                        class="fab fa-linkedin-in fw-normal"></i></a>
+
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -349,7 +347,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ asset('design/img/team-2.jpg') }}"
+                            <img class="img-fluid w-100" src="{{ asset('design/img/polsri.png') }}"
                                 alt="" />
                             <div class="team-social">
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
@@ -358,8 +356,7 @@
                                         class="fab fa-facebook-f fw-normal"></i></a>
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
                                         class="fab fa-instagram fw-normal"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
-                                        class="fab fa-linkedin-in fw-normal"></i></a>
+
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -371,8 +368,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ asset('design/img/team-3.jpg') }}"
-                                alt="" />
+                            <img class="img-fluid w-100" src="{{ asset('design/img/mi.png') }}" alt="" />
                             <div class="team-social">
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
                                         class="fab fa-twitter fw-normal"></i></a>
@@ -380,8 +376,7 @@
                                         class="fab fa-facebook-f fw-normal"></i></a>
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
                                         class="fab fa-instagram fw-normal"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
-                                        class="fab fa-linkedin-in fw-normal"></i></a>
+
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -399,9 +394,9 @@
     <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row">
-               <div class="col-lg-12">
-                <h5 class="text-center text-white">Copyright by Manajemen Informatika</h5>
-               </div>
+                <div class="col-lg-12">
+                    <h5 class="text-center text-white">Copyright by Manajemen Informatika</h5>
+                </div>
             </div>
         </div>
     </div>

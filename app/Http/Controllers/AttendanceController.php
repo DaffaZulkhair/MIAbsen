@@ -135,9 +135,19 @@ class AttendanceController extends Controller
 
     public function datatable_verification()
     {
-        $model = Attendance::where('status', Attendance::STATUS_CANT_PRESENT)
-            ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
-            ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PERMIT);
+        if (Auth::user()->hasRole('Dosen')) {
+            $id = Auth::user()->id;
+            $lecturer = Lecturer::where('user_id', $id)->first();
+            $model = Attendance::where('schedule_lecturer_name', $lecturer->name)
+                ->where('status', Attendance::STATUS_CANT_PRESENT)
+                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
+                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PERMIT)
+                ->orderBy('id', 'desc');
+        } else {
+            $model = Attendance::where('status', Attendance::STATUS_CANT_PRESENT)
+                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
+                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PERMIT);
+        }
 
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
