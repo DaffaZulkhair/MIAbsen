@@ -21,7 +21,8 @@
         @endif
 
         <div class="card-body">
-            <form action="{{ route('user.update', Crypt::encrypt($user['id'])) }}" method="post">
+            <form action="{{ route('user.update', Crypt::encrypt($user['id'])) }}" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <h5>Peran : </h5>
