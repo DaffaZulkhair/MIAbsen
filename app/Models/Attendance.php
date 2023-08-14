@@ -14,7 +14,7 @@ class Attendance extends Model
     const STATUS_NOT_CONFIRMED_PRESENT = "Menunggu Verifikasi (Hadir)";
     const STATUS_NOT_CONFIRMED_PERMIT = "Menunggu Verifikasi (Izin/Sakit)";
     const STATUS_CANT_PRESENT = "Hadir";
-    const STATUS_PRESENT = "Hadir";
+    const STATUS_PRESENT = "Hadir2";
     const STATUS_ABSENT = "Tidak Hadir";
     const STATUS_LATE = "Terlambat";
     const STATUS_SICK = "Sakit";
