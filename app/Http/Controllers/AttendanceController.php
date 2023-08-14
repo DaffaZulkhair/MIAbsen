@@ -139,14 +139,13 @@ class AttendanceController extends Controller
             $id = Auth::user()->id;
             $lecturer = Lecturer::where('user_id', $id)->first();
             $model = Attendance::where('schedule_lecturer_name', $lecturer->name)
-                ->where('status', Attendance::STATUS_CANT_PRESENT)
-                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
+                ->where('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
                 ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PERMIT)
                 ->orderBy('id', 'desc');
         } else {
-            $model = Attendance::where('status', Attendance::STATUS_CANT_PRESENT)
-                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
-                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PERMIT);
+            $model = Attendance::where('status', Attendance::STATUS_NOT_CONFIRMED_PRESENT)
+                ->orWhere('status', Attendance::STATUS_NOT_CONFIRMED_PERMIT)
+                ->orderBy('id', 'desc');
         }
 
         return DataTables::of($model)
@@ -216,10 +215,10 @@ class AttendanceController extends Controller
                     'score_hour' => $score_hour,
                     'status' => Attendance::STATUS_ABSENT
                 ]);
-            } elseif ($request->type == Attendance::STATUS_PRESENT) {
+            } elseif ($request->type == Attendance::STATUS_CANT_PRESENT) {
                 $attendance->update([
                     'score_hour' => $score_hour,
-                    'status' => Attendance::STATUS_PRESENT
+                    'status' => Attendance::STATUS_CANT_PRESENT
                 ]);
             } elseif ($request->type == Attendance::STATUS_LATE) {
                 $attendance->update([
@@ -259,6 +258,9 @@ class AttendanceController extends Controller
         try {
             DB::beginTransaction();
 
+            $todayStart = Carbon::today();
+            $todayEnd = $todayStart->copy()->endOfDay();
+
             $today = Carbon::now()->format('Y-m-d');
             $time_today = Carbon::now()->format('H:i:s');
             $date = $request->schedule_date;
@@ -281,8 +283,10 @@ class AttendanceController extends Controller
             $user_id = Auth::user()->id;
             $student = Student::where('user_id', $user_id)->first();
 
+
+
             $checkAttendance = Attendance::where('schedule_id', $schedule_id)
-                ->where('created_at', Carbon::now())
+                ->whereBetween('created_at', [$todayStart, $todayEnd])
                 ->first();
 
             if ($checkAttendance) {
@@ -344,7 +348,7 @@ class AttendanceController extends Controller
                         'schedule_course_name' => $request->schedule_course_name,
                         'schedule_lecturer_name' => $request->schedule_lecturer_name,
                         'total_hour' => $course->total_hour,
-                        'status' => Attendance::STATUS_CANT_PRESENT
+                        'status' => Attendance::STATUS_NOT_CONFIRMED_PRESENT
                     ]);
                 } else {
                     // Save File

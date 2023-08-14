@@ -28,7 +28,7 @@ class Attendance extends Model
     ];
 
     const STATUS_ADMIN_CHOICE = [
-        self::STATUS_PRESENT => self::STATUS_PRESENT,
+        self::STATUS_CANT_PRESENT => self::STATUS_CANT_PRESENT,
         self::STATUS_SICK => self::STATUS_SICK,
         self::STATUS_PERMIT => self::STATUS_PERMIT,
         self::STATUS_ABSENT => self::STATUS_ABSENT,
