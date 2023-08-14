@@ -39,9 +39,9 @@
                             <div class="col-md-12 text-center mt-4">
                                 @if ($time_today >= $item->time_start && $time_today <= $item->time_end)
                                     <a href="{{ route('attendance.present', Crypt::encrypt($item->id)) }}"
-                                        class="btn btn-primary btn-sm">Presensi Kehadiran</a>
+                                        class="btn btn-success btn-sm">Presensi Kehadiran</a>
                                 @else
-                                    <span class="badge badge-success">Presensi Ditutup</span>
+                                    <span class="badge badge-danger">Presensi Ditutup</span>
                                 @endif
                             </div>
                         </div>

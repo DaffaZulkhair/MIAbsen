@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @hasanyrole('Admin|Dosen|Pimpinan')
+    @hasanyrole('Admin|Pimpinan')
         <div class="row">
             <div class="col-md-12 mb-4 mt-1">
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -69,6 +69,60 @@
             </div>
         </div>
     @endhasanyrole
+
+    @role('Dosen')
+        <div class="row">
+            <div class="col-md-12 mb-4 mt-1">
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                    <h4 class="font-weight-bold">Beranda</h4>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <p class="mb-2 text-secondary">Mahasiswa</p>
+
+                                    <h5 class="mb-0 font-weight-bold">{{ $totalStudent }}</h5>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <p class="mb-2 text-secondary">Kehadiran</p>
+
+                                    <h5 class="mb-0 font-weight-bold">{{ $totalAttendance }}</h5>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <p class="mb-2 text-secondary">Jadwal Kuliah</p>
+
+                                    <h5 class="mb-0 font-weight-bold">{{ $totalSchedule }}</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endrole
 
     @role('Mahasiswa')
         <div class="card">
@@ -149,13 +203,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
                                         <label>Alamat</label>
-                                        <input type="text" class="form-control" value="{{ $student['address'] }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $student['address'] }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
                                         <label>Agama</label>
-                                        <input type="text" class="form-control" value="{{ $student['religion'] }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $student['religion'] }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
