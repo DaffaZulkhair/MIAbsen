@@ -195,12 +195,12 @@
                     <div class="section-title position-relative pb-3 mb-5">
                         <h5 class="fw-bold text-primary text-uppercase">Tentang</h5>
                         <h1 class="mb-0">
-                            Pendataan Presensi Mahasiswa Manajemen Informatika Polsri
+                            Pendataan Presensi Mahasiswa Manajemen Informatika
                         </h1>
                     </div>
                     <p class="mb-4">
-                        MIabsen Berfungsi sebagai tempat presensi mahasiswa serta pengelolaan kehadiran belajar mengajar
-                        di jurusan Manajemen Informatika
+                        MIabsen Berfungsi sebagai tempat presensi mahasiswa serta pengelolaan kehadiran mahasiswa
+                        di jurusan Manajemen Informatika Politeknik Negeri Sriwijaya
                     </p>
                     <div class="row g-0 mb-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
@@ -208,12 +208,12 @@
                                 <i class="fa fa-check text-primary me-3"></i>Tepat Waktu
                             </h5>
                             <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Sesuai Tempat
+                                <i class="fa fa-check text-primary me-3"></i>Data Akurat
                             </h5>
                         </div>
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
                             <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Data Akurat
+                                <i class="fa fa-check text-primary me-3"></i>Mudah Dijangkau
                             </h5>
                             <h5 class="mb-3">
                                 <i class="fa fa-check text-primary me-3"></i>Mudah Terpantau
