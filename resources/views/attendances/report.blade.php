@@ -75,11 +75,13 @@
                     },
                     {
                         name: 'student_class',
-                        data: 'student_class'
+                        data: 'student_class',
                     },
                     {
                         name: 'student_nim',
-                        data: 'student_nim'
+                        data: 'student_nim',
+                        searchable: false,
+
                     },
                     {
                         name: 'student_name',

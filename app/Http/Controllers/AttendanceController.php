@@ -66,10 +66,7 @@ class AttendanceController extends Controller
             ->editColumn('student_nim', function ($data) {
                 return $data->student->nim;
             })
-
-            ->editColumn('student_class', function ($data) {
-                return $data->student->class;
-            })
+            
             ->toJson();
     }
 

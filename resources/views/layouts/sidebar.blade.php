@@ -226,8 +226,21 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                                 </svg>
-
                             </i><span class="">Kehadiran</span>
+                        </a>
+                    </li>
+                    <li class="px-3 pt-3 pb-2">
+                        <span class="text-uppercase small font-weight-bold">Laporan</span>
+                    </li>
+                    <li class=" sidebar-layout">
+                        <a href="{{ route('attendance.report') }}" class="svg-icon">
+                            <i class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </i><span class="ml-2">Laporan Presensi</span>
                         </a>
                     </li>
                 @endrole
