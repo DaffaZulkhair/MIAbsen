@@ -66,7 +66,7 @@ class AttendanceController extends Controller
             ->editColumn('student_nim', function ($data) {
                 return $data->student->nim;
             })
-            
+
             ->toJson();
     }
 
@@ -111,6 +111,11 @@ class AttendanceController extends Controller
                 $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
                 return $formatedDate;
             })
+            ->editColumn('score_hour', function ($data) {
+                if ($data->score_hour > 50) {
+                    return "<span class='bg-danger'>$data->score_hour</span>";
+                }
+            })
             ->addColumn('action', function ($data) {
                 $url_show = route('attendance.show', Crypt::encrypt($data->id));
                 $url_delete = route('attendance.destroy', Crypt::encrypt($data->id));
@@ -127,6 +132,7 @@ class AttendanceController extends Controller
 
                 return $btn;
             })
+            ->rawColumns(['score_hour', 'action'])
             ->toJson();
     }
 
